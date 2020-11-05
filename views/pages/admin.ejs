@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../parts/head.ejs') %>
+    <link rel="stylesheet" href="/stylesheets/aboutus.css">
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+</head>
+<body>
+       <!-- navbar -->
+    <div>
+        <%- include('../parts/header.ejs') %>
+    </div>
+    <form action="#">
+        <div class="container">
+            <div class="row"><a href="#">Dashboard</a></div>
+            <div class="row">
+                <label for="appointment">
+                    Appointment
+                </label>
+                <select class="form-control" name="appointment" id="appointment">
+                    <a href="/admin/bookAppointment">
+                    <option value="/admin/bookAppointment">Book appointment</option>
+                    </a>
+                    <option value="all appointments">
+                        <a href="/admin/allAppointment">All appointment</a>
+                    </option>
+                    <!-- <option value=""></option> -->
+                </select>
+            </div>
+        </div>
+    </form>
+    
+        
+  <script src="/javascripts/admin.js"></script>
+</body>
+</html>

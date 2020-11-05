@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../parts/head.ejs') %>
+     <link rel="stylesheet" href="/stylesheets/aboutus.css">
+     <link rel="stylesheet" href="/stylesheets/news.css">
+
+</head>
+<body>
+    <!-- navbar -->
+    <div>
+        <%- include('../parts/header.ejs') %>
+    </div>
+    <!-- carousel -->
+    <div class="carouseltemplate carousel">
+        <div class="tag-lines">
+            <h2 >READ OUR NEWS</h2>
+            <h1 >OUR <strong>NEWS</strong> </h1>
+        </div>
+    </div>
+    <!-- carousal work completed -->
+    <div class="news">
+        <div class="container">
+            <div class="row row-3">
+                <div class="news-col col-lg-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="/images/img_1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Read Article</a>
+                        </div>
+                      </div>
+                </div>
+                <div class="news-col col-lg-4">
+                    <div class="card" style="width: 18rem;">
+                    <img src="/images/img_1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="btn btn-primary">Read Article</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="news-col col-lg-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="/images/img_1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Read Article </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-3">
+                <div class="news-col col-lg-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="/images/img_1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          
+                          <a href="#" class="btn btn-primary">Read Article</a>
+                        </div>
+                        <div class="date">
+                            Date: <%= new Date(Date.now()).toLocaleDateString() %>
+                        </div>
+                      </div>
+                </div>
+                <div class="news-col col-lg-4">
+                    <div class="card" style="width: 18rem;">
+                    <img src="/images/img_1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="btn btn-primary">Read Article</a>
+                    </div>
+                      <div class="date">
+                        Date: <%= new Date(Date.now()).toLocaleDateString() %>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div class="news-col col-lg-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="/images/img_1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Read Article </a>
+                        </div>
+                            <div class=" date">
+                                Date: <%= new Date(Date.now()).toLocaleDateString() %>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <%- include('../parts/footer.ejs') %>
+</body>
+</html>

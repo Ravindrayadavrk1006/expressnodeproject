@@ -1,0 +1,71 @@
+*
+{
+    box-sizing: border-box;
+}
+.carouseltemplate
+{
+  height: 50vw;
+}
+
+.dentistteam-col
+{
+    margin-bottom:10%;
+}
+.dentistteam-heading
+{
+    text-align: center;
+}
+.dentisttemplate
+{
+    padding: 4%;
+    /* background-color: darkgrey; */
+    text-align: center;
+    margin-right: 4%;
+}
+.dentisttemplate h4
+{
+    margin-top: 1.5vh;
+    transition: transform .2s;
+}
+.dentisttemplate h4:hover
+{
+    transform: scale(1.05);
+}
+
+.dentisttemplate img
+{
+    height:20vw; 
+    transition: transform .2s;
+    margin-bottom: 2%;
+}
+.dentisttemplate img:hover
+{
+    transform: scale(1.05);
+}
+.dentisttemplate p{
+    /* width:30vw; */
+    /* padding-left: 10%; */
+    font-size: 1.5vw;
+    margin-top: 2vh;
+}
+.partition
+{
+    background-color: #f54242;
+    height: 35vh;
+}
+@media only screen and (max-width:800px)
+{
+    .partition
+    {
+        height: 20vh;
+    }
+}
+#loader
+{
+    margin-top: 50%;
+    margin-left: 50%;
+}
+.tag-lines span
+{
+    font-weight: lighter;
+}

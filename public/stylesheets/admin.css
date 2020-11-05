@@ -1,0 +1,29 @@
+.sidebar
+{
+    background-color: bisque;
+    height: 100vh;
+    width: 12.5vw;
+    text-align: left;
+}
+.sidebar a
+{
+    color:black;
+    text-decoration: none;
+}
+.sidebar a:hover
+{
+    color: green;
+}
+.menubar li
+{
+    font-size: 2vh;
+}
+.menubar
+{
+    text-align: left;
+    color: rgb(112, 105, 105);
+}
+.menubar li:hover
+{
+    color: green;
+}

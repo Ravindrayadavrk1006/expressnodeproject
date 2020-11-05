@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../parts/head.ejs') %>
+     <link rel="stylesheet" href="/stylesheets/aboutus.css">
+    </head>
+<body>
+   
+       <!-- navbar -->
+       <div>
+        <%- include('../parts/header.ejs') %>
+    </div>
+    <!-- carousel -->
+    <div class="carouseltemplate carousel">
+        <div class="tag-lines">
+            <h2 >GET IN TOUCH</h2>
+            <h1 >   <strong>CONTACT</strong> <span>US</span> </h1>
+        </div>
+    </div>
+    <!-- carousal work completed -->
+    <div class="form-section">
+        <div class="container ">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="originalForm">
+                        <form class="formupload" action="/formupload" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="firstname"><strong>First Name</strong></label>
+                                        <input type="text" id="secondname" class="form-control">
+                                    </div>
+                                </div>
+                    
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="secondname"><strong>Second Name</strong></label>
+                                        <input type="text" id="secondname" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="date">
+                                           <strong> Date</strong>
+                                        </label>
+                                        <input type="date" name="" id="date" class="form-control"></div>
+                                </div>
+                                <div class="col-md-6">
+                                   <div class="form-group">
+                                       <label for="email"><strong>Email</strong></label>
+                                       <input type="email" class="form-control" name="email" id="email">
+                                   </div>
+                                </div>
+                            </div>
+                            
+                                                        
+                            <div class="form-group"><label for="treatmentneeded"><strong>Treatment Needed</strong></label>
+                                <select class="form-control" name="" id="treatmentneeded" >
+                                    <option value="1">Dental examination</option>
+                                    <option value="2">Ortho Treatment</option>
+                                    <option value="3">Emergency</option>
+                                    <option value="4">Any other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="notes"><strong>Notes</strong></label>
+                                <textarea class="form-control" name="notes" id="notes" cols="20" rows="5"></textarea>
+                            </div>
+                            <button class="btn btn-success">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-6">
+                    <div class="appointmentDesc">
+                        <h3 id="h2-1">ONLINE</h3>
+                    <h2><b>APPOINTMENT</b> </h2>
+                    <h3 id="h2-1">REQUEST FORM</h3>
+                    <p class="p1">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi impedit recusandae, eum facere magnam possimus perspiciatis ullam illum omnis, quos autem explicabo repellendus
+                    </p>
+                    <p class="p2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error incidunt, maxime quod repellendus commodi iure vel omnis, alias aliquam exercitationem optio impedit eligendi at aperiam, cumque it</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- redline division    -->
+        <div class="partition">
+    <!-- footer -->
+   <%- include('../parts/footer.ejs') %>  
+</body>
+</html>

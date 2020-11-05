@@ -1,0 +1,46 @@
+.carouseltemplate
+{
+    height:45vw;
+}
+.card
+{
+    text-align: center;
+    /* height: 10vh; */
+    padding-bottom: 2%;
+}
+.card p
+{
+    font-size: 1vw;
+}
+.card img
+{
+    height: 17vw;
+}
+.date
+{
+    font-size: .9vw;
+    text-align: right;
+    opacity: .7;
+
+}
+.news-col
+{
+   margin-bottom: 5vh   ; 
+}
+@media only screen and (max-width:900px)
+{
+    .card p
+    {
+        font-size: 2vw;
+    }
+    .date
+    {
+        font-size: 2vw;
+    }
+}
+
+/* .row-3
+{
+    margin-bottom: 5vw;
+} */
+

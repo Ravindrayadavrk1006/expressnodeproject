@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Book appointment</title>
+        <%- include('../../parts/head.ejs') %>
+        <link rel="stylesheet" href="/stylesheets/newPatient.css">
+    </head>
+<body>
+    <h1>Add Patient</h1>
+    
+    <form class="addPatientForm" action="/admin/newPatient" method="post">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="firstName">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="secondName">Last Name</label>
+                    <input type="text" class="form-control" name="secondName" id="secondName">
+                </div>
+            </div>
+        </div>
+
+        
+       
+        <div class="form-group">
+            <label for="mobileNo">Mobile No.</label>
+            <input type="tel" class="form-control" name="mobileNo" id="mobileNo">
+        </div>
+        <div class="form-group">
+            <label for="Dob">Date of Birth</label>
+            <input class="form-control" type="date" name="Dob" id="Dob">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" type="email" name="email" id="email">
+        </div>
+        <div class="form-group">
+            <label for="treatmentType">Treatment Type</label>
+            <input class="form-control" type="text" name="treatmentType" id="treatmentType">
+        </div>
+        <div class="form-group">
+            <label for="treatmentInfo">Area to focus during treatment</label>
+            <textarea class="form-control" name="treatmentInfo" id="treatmentInfo" cols="100" rows="5"></textarea>
+        </div>
+        <div class="buttonArea">
+            <button class="btn btn-success" type="submit">Submit</button>
+            <button class="btn btn-dark" type="reset">Reset</button>
+            <button onclick="" class="btn btn-danger">Cancel</button>
+        </div>
+       
+    </form>
+</body>
+</html>

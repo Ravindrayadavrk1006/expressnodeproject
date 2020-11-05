@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Book appointment</title>
+        <link rel="stylesheet" href="/stylesheets/index.css">
+        <%- include('../../parts/head.ejs') %>
+        <link rel="stylesheet" href="/stylesheets/newPatient.css">
+    </head>
+<body>
+    <div class="container">
+        <% for(var i = 0; i < patients.length; i++) { %>
+            <% if (i === 0 || i % 3 === 0) { %>
+              <div class="row">
+            <% } %>
+              <div class="col-sm">
+                <div class="card border-danger mb-3" style="max-width: 20rem;">
+                    <div class="card-body">
+                       <h4 class="card-title"><%= patients[i].firstName %> <%=patients[i].secondName%></h4>
+                       <h5>
+                           Email <%= patients[i].email %> <br>
+                           MobileNo <%= patients[i].mobileNo%>
+                       </h5>
+                        <p class="card-text">
+                            treatment type: <%= patients[i].treatmentType%>
+                        </p>
+                          <p 
+                          class="card-text">patient illness info: <%= patients[i].treatmentInfo %><br>
+                          </p>
+                    </div>
+                </div>
+              </div>
+            <% if (i === 0 || i % 3 === 0) { %>
+              </div>
+            <% } %>
+          <% } %>
+    
+    </div>
+</body>
+</html>
+
+<!-- 
+<div class="col-sm">
+    
+</div> -->

@@ -1,0 +1,339 @@
+.body
+{
+    padding: 0%;
+    margin: 0%;
+    overflow-x: hidden ! important;
+}
+.carousel
+{
+    background-image:url('/images/carousal1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position:top;
+    background-position: center center;
+    padding-bottom: 2%;
+    margin-bottom: 5%;
+    /* height: 130vh; */
+}
+
+
+.tag-lines
+{
+    position: relative;
+    padding-top: 10%;
+    padding-left: 10%;
+    color: white;
+}
+/* displaying the card container only if the min-width is 700px */
+/* /maximum screen se mtlb tak */
+@media only screen and (max-width:700px)
+{
+    .card-container
+    {
+        display: none;  
+    }
+}
+.card-container
+{
+    margin-top: 2%;
+    margin-bottom: 5%;
+    /* margin-bottom: 10%; */
+    /* margin-bottom: 5%; */
+}
+.card-1
+{
+    background-color:rgba(46, 44, 39,.6);
+    /* background-color: black; */
+    color: white;
+    /* opacity:.4; */
+    align-items: center;
+    padding:5%;
+    /* padding-top: 40px; */
+    /* opacity: .6;   */
+}
+.card-1 h4{
+    font-size:4vw;
+}
+.card-1 p{
+    font-size:1vw
+}
+@media only screen and (min-width:700px)
+{
+    .card-container-col
+    {
+        display: none;
+    }
+}
+.card-container-col
+{
+    margin-top:10%;
+    margin-bottom:5%;
+    color: white;
+    /* font-size: 10vw; */
+    /* text-align: center; */
+    opacity: 1;
+}
+.card-container-col h4
+{
+    font-size:4vw ;
+}
+.card-container-col p
+{
+    font-size: 3vw;
+}
+.card-2
+{
+    background-color:rgba(46, 44, 39,.6);
+    padding-bottom: 2%;
+    text-align: center;
+    margin-bottom: 2%;
+
+    
+}
+svg
+{
+    fill: rgb(88, 100, 88);
+}
+
+.card-img-self
+{
+    width: 50%;
+    height: 10vw;
+}
+.card-4
+{
+    padding: 5%;
+    margin-top: 8%;
+    text-align: center;
+    margin-right:10%
+/*     
+    margin: 20%;
+    height: 15vw; */
+}
+.sec-3
+{
+    overflow: hidden;
+}
+.card-text
+{
+    font-size:2vw;
+}
+.card-s-1
+{
+    
+    box-shadow: -10px 0px 10px 1px #aaaaaa;
+
+}
+.card-s-3
+{
+    box-shadow: -10px 0px 10px 1px #aaaaaa;
+}
+.card-s-2
+{
+    
+    box-shadow: -10px 0px 10px 1px #aaaaaa;
+
+}
+.card-s-4
+{
+    box-shadow: -10px 0px 10px 1px #aaaaaa;
+}
+.card-s-4:hover
+{
+    box-shadow: 5px 5px  #aaaaaa;
+}
+.card-s-2:hover
+{
+    box-shadow: 5px 5px  #aaaaaa;
+}
+.card-s-1:hover
+{
+    box-shadow: 5px 5px  #aaaaaa;
+}
+.card-s-3:hover
+{
+    box-shadow: 5px 5px  #aaaaaa;
+}
+
+/* form section */
+.form-section
+{
+    margin-top: 10%;
+    /* margin-bottom: 10%; */
+    padding: 10%;
+    background-size: cover;
+    background-size: 100%;
+    background:#5c9171;
+}
+.originalForm
+{
+    padding:10%;
+    background-color: white;
+}
+.appointmentDesc
+{
+    padding-top: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.appointmentDesc h2{
+    font-size: 4vw;
+}
+#h2-2
+{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: lighter;
+}
+.p1
+{
+    color:white
+}
+.p2
+{
+    opacity: .6;
+    color: white;
+}
+.services
+{
+    background-color:white;
+    text-align: center;
+    color:white;
+    padding-bottom: 10%;
+}
+.services h1
+{
+    margin-top: 3%;
+    color: rgb(36, 33, 33);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 4vw;
+    margin-bottom: 5%;
+}
+.services p{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.row-1
+{
+    margin-bottom: 5vh;
+}
+.icon-template
+{
+   border-radius: 5%;
+    background-color: rgba(23, 23, 22,.7);
+    padding: 5%;
+}
+.icon-template img
+{
+    height:20vh;
+}
+@media only screen and (max-width:1000px)
+{
+    .icon-template
+    {
+        margin: 5%;
+    }
+}
+
+/* doctorinfo section */
+.doctorinfo {
+    background-color: #52646b;
+    /* padding: 3%; */
+    text-align: center;
+    /* height: 100vh; */
+}
+.doctorinfo-col-1 
+{
+    width: 100%;
+    padding-top: 5%;
+    font-size: 1ovh;
+    /* height: 80vh; */
+}
+
+.doctorinfo-col-2 img
+{
+    height: 90vh;
+    width: 100vw;
+}
+@media only screen and (max-width:1000px)
+{
+    .doctorinfo-col-2 {
+        display: none
+    };
+}
+/* commenttemplate */
+.comments
+{
+    margin-top: 5%;
+}
+.commenttemplate
+{
+    background-color: #5c9171;
+    text-align: center;
+    padding: 10%;
+    transition: transform .2s;
+    margin-bottom: 10%;
+}
+.commenttemplate p
+{
+    margin-top: 8px;
+}
+.commenttemplate:hover
+{
+    background-color: grey;
+    transform: scale(1.05);
+}
+.commenttemplate img
+{
+    
+    height: 10vw;
+    margin-bottom:2px;
+
+}
+@media only screen and (max-width:1000px)
+{
+        .commenttemplate img{
+            height: 20vw;
+        };
+}
+#commentsh1
+{
+    text-align: center;
+    font-size: 5vw;
+    margin-bottom: 5%;
+}
+.socialmedia-icon img
+{
+    margin-top: 1vw;
+    height:3vw;
+}
+.heartImage
+{
+    
+    /* width: 100%; */
+    height:2vw;
+}
+/* //the footer */
+.footer
+{
+    text-align: center;
+    padding-top:20vh;
+    padding-bottom: 10vh;
+    color: white;
+    background-color:#545955;
+}
+.footer h2
+{
+    margin-bottom: 2vw;
+}
+.creater
+{
+    font-size: 1vw;
+    margin-top: 5%;
+    text-align: center;
+}
+@media only screen and (max-width:1000px)
+{
+    .socialmedia-icon img {
+            height: 5vw;
+            margin-bottom: 2vw
+    };
+}

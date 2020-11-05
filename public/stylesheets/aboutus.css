@@ -1,0 +1,23 @@
+/* .carouseltemplate
+{
+  height: 50vw;
+} */
+.tag-lines h1
+{
+  font-size: 6vw;
+}
+.tag-lines h2
+{
+  font-size: 3vw;
+  font-weight: lighter;
+  opacity: .7;
+}
+
+.tag-lines p{
+  width: 40vw;
+  font-size: 1.3vw;
+}
+.icon-template
+{
+  /* background-color: white; */
+}
