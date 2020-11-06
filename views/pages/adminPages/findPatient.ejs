@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../../parts/head.ejs') %>
+         <link rel="stylesheet" href="/stylesheets/aboutus.css">
+         <link rel="stylesheet" href="/stylesheets/commonform.css">
+        </head>
+    <body>
+       
+           <!-- navbar -->
+        <div>
+            <%- include('../../parts/header.ejs') %>
+        </div>
+        <h2 style="margin-left:30%;margin-top: 4%;">Find the patient</h2>
+        <form class="inputForm rounded-top rounded-bottom" action="/admin/findPatient" method="post">
+           <div class="row">
+               <div class="col">
+                <div class="form-group">
+                    <label for="firstName">first name</label>
+                    <input class="form-control" type="text" name="firstName" id="secondName">
+                </div>
+               </div>
+               <div class="col">
+                   <label for="secondName">second Name</label>
+                   <input class="form-control" type="text" name="secondName" id="secondName">
+               </div>
+           </div>
+           <button class="btn btn-success" type="submit">Show</button>
+        </form>
+        
+    </body>
+</html>

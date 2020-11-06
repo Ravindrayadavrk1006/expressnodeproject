@@ -1,29 +1,48 @@
-.sidebar
-{
-    background-color: bisque;
-    height: 100vh;
-    width: 12.5vw;
-    text-align: left;
-}
-.sidebar a
-{
-    color:black;
-    text-decoration: none;
-}
-.sidebar a:hover
-{
-    color: green;
-}
-.menubar li
-{
-    font-size: 2vh;
-}
-.menubar
-{
-    text-align: left;
-    color: rgb(112, 105, 105);
-}
-.menubar li:hover
-{
-    color: green;
-}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+  
+  #sidebar, #content {
+    height: 100%;
+    overflow:auto;
+    float:left;
+    transition: width .35s;
+  }
+  
+  #sidebar {
+    background:white;
+    width: 40%;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.5);
+  }
+  
+  #sidebar.collapsed {
+    width: 0;
+  }
+  
+  #sidebar.collapsed + #content {
+    width: 100%;
+  }
+  
+  #content {
+    background:gray;
+    width: 60%;
+  }
+  
+  button {
+    /* width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border:none;
+    outline:none;
+    background: black;
+    margin: 20px; */
+    cursor:pointer;
+  }
+  
+  h3 {
+    font-family: sans-serif;
+    color:white;
+    text-align:center;
+  }

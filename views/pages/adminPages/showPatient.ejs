@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../../parts/head.ejs') %>
+         <link rel="stylesheet" href="/stylesheets/aboutus.css">
+         <link rel="stylesheet" href="/stylesheets/commonform.css">
+        </head>
+    <body>
+       
+           <!-- navbar -->
+        <div>
+            <%- include('../../parts/header.ejs') %>
+        </div>
+        <% if(patient == undefined) { %> 
+            <div class="show_message" >
+                <h5>No such patient exists</h5>
+                <a href="/admin">
+                    <button  class="btn btn-success">
+                        redirect
+                    </button>
+                </a>
+            </div>
+            <%}%>
+        <%if(patient == !undefined) {%>
+        <div class="card border-danger mb-3" style="max-width: 20rem;">
+            
+            <div class="card-body">
+               <h4 class="card-title"><%= patient.firstName %> <%=patient.secondName%></h4>
+               <h5>
+                   Email <%= patient.email %> <br>
+                   MobileNo <%= patient.mobileNo%>
+               </h5>
+                <p class="card-text">
+                    treatment type: <%= patient.treatmentType%>
+                </p>
+                  <p 
+                  class="card-text">patient illness info: <%= patient.treatmentInfo %><br>
+                  </p>
+            </div>
+           
+        </div>
+        <%}%>
+        <style>
+            .show_message
+            {
+                margin-top:30%;
+                text-align: center;
+                height: 40%;
+                background-color: rgb(226, 141, 141);
+            }
+        </style>
+        
+    </body>
+</html>

@@ -1,36 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include('../parts/head.ejs') %>
-    <link rel="stylesheet" href="/stylesheets/aboutus.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <%- include('../parts/head.ejs')%>
     <link rel="stylesheet" href="/stylesheets/admin.css">
+    <script src="/"></script>
 </head>
 <body>
-       <!-- navbar -->
-    <div>
-        <%- include('../parts/header.ejs') %>
+    <!-- <%- include('../parts/header')%> -->
+    <div id="sidebar" class="collapsed">
+        <ul>
+            <a href="#">
+                <li>Dashboard</li>
+            </a>
+            <a href="#">
+                <li>
+                    <div class="dropdown show">
+                        <a class="btn btn-default dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Appointments
+                        </a>
+                      
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <a class="dropdown-item" href="/admin/bookAppointment">Book Appointment</a>
+                          <a class="dropdown-item" href="/admin/allAppointments">All appointment</a>
+                          <a class="dropdown-item" href="/admin/updateAppointment">Update Appointment</a>
+                          <a href="/admin/cancelAppointment" class="dropdown-item">Cancel Appointment</a>
+                        </div>
+                      </div>
+                </li>
+            </a>
+            <a href="#">
+                <li>
+                    <div class="dropdown show">
+                        <a class="btn btn-default dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Patients
+                        </a>
+                      
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <a class="dropdown-item" href="/admin/allPatients">All Patients</a>
+                          <a class="dropdown-item" href="/admin/newPatient">Add Patient</a>
+                          <a class="dropdown-item" href="/admin/deletePatient">Delete patient</a>
+                          <a href="/admin/findPatient" class="dropdown-item">View patient</a>
+                        </div>
+                      </div>
+                </li>
+            </a>
+        </ul>
     </div>
-    <form action="#">
-        <div class="container">
-            <div class="row"><a href="#">Dashboard</a></div>
-            <div class="row">
-                <label for="appointment">
-                    Appointment
-                </label>
-                <select class="form-control" name="appointment" id="appointment">
-                    <a href="/admin/bookAppointment">
-                    <option value="/admin/bookAppointment">Book appointment</option>
-                    </a>
-                    <option value="all appointments">
-                        <a href="/admin/allAppointment">All appointment</a>
-                    </option>
-                    <!-- <option value=""></option> -->
-                </select>
-            </div>
-        </div>
-    </form>
-    
+    <div id="content">
+      <button class="btn btn-secondary"  title="Toggle sidebar">Options</button>
+        <%if(msg != '')
+        {%>
+            <%= msg%>
+        <%}%>
+
+            <h2>Welcome Admin</h2>
+            <h4>Cheers! you are making peoples smile confident</h4>
+            
+    </div>
+
+    <script>
         
-  <script src="/javascripts/admin.js"></script>
+        const button = document.querySelector('button');
+
+        button.addEventListener('click', _ => {
+        document.getElementById('sidebar').classList.toggle('collapsed');
+        })
+
+    </script>
 </body>
 </html>
