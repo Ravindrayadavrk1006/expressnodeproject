@@ -4,6 +4,8 @@
         <%- include('../../parts/head.ejs') %>
          <link rel="stylesheet" href="/stylesheets/aboutus.css">
          <link rel="stylesheet" href="/stylesheets/commonform.css">
+         <link rel="stylesheet" href="/stylesheets/finder.css">
+         <script src="/javascripts/finder.js"></script>
         </head>
     <body>
        
@@ -11,19 +13,24 @@
         <div>
             <%- include('../../parts/header.ejs') %>
         </div>
-        
-        <form class="inputForm rounded-top rounded-bottom" action="/admin/updateAppointment" method="POST">
+        <a  href="/admin">
+            <button  class="btn btn-danger">Back</button>
+          </a>
+        <h1 style="text-align: center;">Update Appointment</h1>
+        <form autocomplete="off" class="inputForm rounded-top rounded-bottom" action="/admin/updateAppointment" method="POST">
             <div class="container">
                 <div class="row">
                     <div class="col">
-                     <div class="form-group">
+                     <div class="form-group autocomplete">
                          <label for="firstName">first name</label>
-                         <input class="form-control" type="text" name="firstName" id="secondName">
+                         <input class="form-control" type="text" name="firstName" id="firstName">
                      </div>
                     </div>
                     <div class="col">
-                        <label for="secondName">second Name</label>
-                        <input class="form-control" type="text" name="secondName" id="secondName">
+                        <div class="form-group autocomplete">
+                            <label for="secondName">second Name</label>
+                            <input class="form-control" type="text" name="secondName" id="secondName">
+                         </div>
                     </div>
                 </div>
                 <div class="row">
@@ -37,6 +44,13 @@
            
            <button class="btn btn-success" type="submit">Update</button>
         </form>
-        
+        <script type="text/javascript">  
+            var firstNameArray= `<%-firstNameArray%>`
+            var secondNameArray= `<%-secondNameArray%>`
+            var firstNameArray=firstNameArray.split(',')
+            var secondNameArray=secondNameArray.split(',');
+            autocomplete(document.getElementById('firstName'),firstNameArray);
+            autocomplete(document.getElementById('secondName'),secondNameArray);
+        </script>
     </body>
 </html>

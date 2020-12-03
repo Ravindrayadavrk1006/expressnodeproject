@@ -3,14 +3,18 @@ const bodyParser=require('body-parser');
 const mongoose=require('mongoose')
 const controllers=require('./controllers/admin')
 const adminRoutes=require('./routes/admin')
+const cont=require('./controllers/admin')
 const port=3001
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+const multer=require('multer');
 databaseName='OmDentals'
 const url=`mongodb://localhost:27017/${databaseName}`
 app.set('view engine','ejs');
+// app.set('view',)
 app.use(express.static(__dirname+'/public'))
+
 //loading the admin routes over the /admin
 app.use('/admin',adminRoutes);
 app.get('/',(req,res,next)=>{
@@ -28,9 +32,14 @@ app.get('/services',(req,res)=>{
 app.get('/contactUs',(req,res)=>{
   res.render('pages/contactUs')
 })
-
-
-
+// allAppoitmentArray=[];
+app.post('/formupload',cont.formUpload);
+// app.use((req,res,next)=>{
+//   res.render('pages/404',{title:'page not found'})
+// })
+app.get('/dummyCheck',(req,res)=>{
+  res.render('parts/detailPage',{title:'student Detail'});
+})
 //connecting to dbase and inside it connecting to the express server inside the mongoose promise
 mongoose.connect(url,{
   useNewUrlParser:true,
@@ -42,6 +51,6 @@ mongoose.connect(url,{
         console.log(`application is running at localhost:${port}`)
       })
     })
-    .catch(err=>{
-      console.log(err)
-    })
+  .catch(err=>{
+    console.log(err)
+  })

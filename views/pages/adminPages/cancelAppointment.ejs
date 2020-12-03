@@ -4,28 +4,44 @@
         <%- include('../../parts/head.ejs') %>
          <link rel="stylesheet" href="/stylesheets/aboutus.css">
          <link rel="stylesheet" href="/stylesheets/commonform.css">
+         <link rel="stylesheet" href="/stylesheets/finder.css">
         </head>
+        <script src="/javascripts/finder.js"></script>
     <body>
        
            <!-- navbar -->
         <div>
             <%- include('../../parts/header.ejs') %>
         </div>
-        <form class="inputForm rounded-top rounded-bottom" action="/admin/cancelAppointment" method="POST">
+        <a  href="/admin">
+            <button  class="btn btn-danger">Back</button>
+          </a>
+        <h1 style="text-align: center;">Cancel Appointment</h1>
+        <form autocomplete="off" class="inputForm rounded-top rounded-bottom" action="/admin/cancelAppointment" method="POST">
            <div class="row">
                <div class="col">
-                <div class="form-group">
+                <div  class="form-group autocomplete">
                     <label for="firstName">first name</label>
-                    <input class="form-control" type="text" name="firstName" id="secondName">
+                    <input class="form-control" type="text" name="firstName" id="firstName">
                 </div>
                </div>
                <div class="col">
-                   <label for="secondName">second Name</label>
-                   <input class="form-control" type="text" name="secondName" id="secondName">
+                    <div class="form-group autocomplete">
+                        <label for="secondName">second Name</label>
+                        <input class="form-control" type="text" name="secondName" id="secondName">
+                    </div>
                </div>
            </div>
-           <button class="btn btn-danger" type="submit">Delete</button>
+           <button  class="btn btn-danger" type="submit">Delete</button>
         </form>
-        
-    </body>
+   <script type="text/javascript">  
+        var firstNameArray= `<%-firstNameArray%>`
+        var secondNameArray= `<%-secondNameArray%>`
+        var firstNameArray=firstNameArray.split(',')
+        var secondNameArray=secondNameArray.split(',');
+        autocomplete(document.getElementById('firstName'),firstNameArray);
+        autocomplete(document.getElementById('secondName'),secondNameArray);
+    </script> 
+
+</body>
 </html>

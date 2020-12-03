@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../parts/head.ejs') %>
+    <title>OM DENTALS</title>
+</head>
+<body>
+    <h2 style="text-align: center;">Write Article</h2>
+    <form style="margin: 10%;" action="/admin/newsArticle"  method="post">
+        <div class="form-group">
+            <label for="img">Main Image</label>
+            <input class="form-control" type="file" name="img" id="img">
+        </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" id="title">
+        </div>
+        <div class="form-group">
+            <label for="subHeading">SubHeading</label>
+            <input type="text" class="form-control" name="subHeading" id="subHeading">
+        </div>
+        <div class="form-group">
+            <label for="article">Article</label>
+            <textarea class="form-control" placeholder="explain article...." name="article" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="articleImages">Article Images</label>
+            <input type="file" class="form-control" name="articleImages" id="articleImages">
+        </div>
+        <button style="margin-left: 35%;" class="btn btn-success">Save Article</button>
+    </form>
+</body>
+</html>

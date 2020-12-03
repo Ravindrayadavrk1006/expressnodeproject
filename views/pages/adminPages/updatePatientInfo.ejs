@@ -3,57 +3,67 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Book appointment</title>
+        <title>Update Patient Info</title>
         <%- include('../../parts/head.ejs') %>
+        
         <link rel="stylesheet" href="/stylesheets/newPatient.css">
     </head>
 <body>
-    <h1>Add Patient</h1>
-    
-    <form class="addPatientForm" action="/admin/updatePatientInfo" method="post">
+    <!-- <a  href="/admin">
+        <button  class="btn btn-danger">Back</button>
+      </a> -->
+    <h1>Update Patient Info</h1>
+    <form action="/admin/updatePatientInfo" method="POST">
+        <a href="/admin"><button class="btn btn-danger">Back</button></a>
+        <%if(patient===null){%>
+            <div style="padding-top:20%;text-align: center;" class="noPatient">
+                <h2>Ohhhh!!! snap</h2>
+                <h3>patient does not exist</h3>
+                <a href="/admin/findPatient">
+                    <button class="btn btn-success">Back</button>
+                </a>
+                <br>
+                <a  style="color:red" href="/admin/newPatient">
+                    Add patient
+                </a>
+            </div>
+            
+            <%}%>
+        <%if(patient!==null){%>
         <div class="row">
-            <div class="col">
+            <div class="col-sm">
                 <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" name="firstName" id="firstName">
-                </div>
+                    <label for="firstName">First name</label>
+                    <input class="form-control" type="text" value= "<%= patient[0].firstName %>" name="firstName" id="firstName">
+                 </div>
             </div>
-            <div class="col">
+            <div class="col-sm">
                 <div class="form-group">
-                    <label for="secondName">Last Name</label>
-                    <input type="text" class="form-control" name="secondName" id="secondName">
-                </div>
+                    <label for="secondName">Second name</label>
+                    <input class="form-control" type="text" value= "<%=patient[0].secondName%>" name="secondName" id="secondName">
+               </div>
             </div>
-        </div>
-
-        
-       
-        <div class="form-group">
-            <label for="mobileNo">Mobile No.</label>
-            <input type="tel" class="form-control" name="mobileNo" id="mobileNo">
-        </div>
-        <div class="form-group">
-            <label for="Dob">Date of Birth</label>
-            <input class="form-control" type="date" name="Dob" id="Dob">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input class="form-control" type="email" name="email" id="email">
+            <input class="form-control" type="text" name="email" value= "<%=patient[0].email%>" id="email">
         </div>
         <div class="form-group">
-            <label for="treatmentType">Treatment Type</label>
-            <input class="form-control" type="text" name="treatmentType" id="treatmentType">
+            <label for="mobileNo ">Phone No</label>
+            <input class="form-control" type="text" value= "<%=patient[0].mobileNo%>" name="mobileNo" id="mobileNo">
         </div>
         <div class="form-group">
-            <label for="treatmentInfo">Area to focus during treatment</label>
-            <textarea class="form-control" name="treatmentInfo" id="treatmentInfo" cols="100" rows="5"></textarea>
+            <label for="treatmentType">TreatmentType</label>
+            <input class="form-control" type="text" name="treatmentType" value= "<%=patient[0].treatmentType%>" id="treatmentType">
         </div>
-        <div class="buttonArea">
-            <button class="btn btn-success" type="submit">Submit</button>
-            <button class="btn btn-dark" type="reset">Reset</button>
-            <button onclick="" class="btn btn-danger">Cancel</button>
+        <div class="form-group">
+            <label for="treatmentInfo">treatmentInfo</label>
+            <textarea class="form-control" name="treatmentInfo"  id="treatmentInfo" cols="30" rows="3">
+                <%=patient[0].treatmentInfo%>
+            </textarea>
         </div>
-       
-    </form>
+        <button class="btn btn-danger">Update</button>
+    <%}%>
+</form>
 </body>
 </html>

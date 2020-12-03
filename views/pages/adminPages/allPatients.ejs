@@ -4,12 +4,21 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Book appointment</title>
-        <link rel="stylesheet" href="/stylesheets/index.css">
+        <!-- <link rel="stylesheet" href="/stylesheets/index.css"> -->
         <%- include('../../parts/head.ejs') %>
-        <link rel="stylesheet" href="/stylesheets/newPatient.css">
+        <!-- <link rel="stylesheet" href="/stylesheets/newPatient.css"> -->
     </head>
+    <style>
+      form{
+        width: 30%;
+        border: 2px solid black;
+      }
+    </style>
 <body>
-    <div class="container">
+  <a  href="/admin">
+    <button  class="btn btn-danger">Back</button>
+  </a>
+    <!-- <div class="container">
         <% for(var i = 0; i < patients.length; i++) { %>
             <% if (i === 0 || i % 3 === 0) { %>
               <div class="row">
@@ -36,8 +45,64 @@
             <% } %>
           <% } %>
     
-    </div>
-</body>
+    </div> -->
+    
+    <%if(patients.length===0){%>
+        <h2>No patient found</h2>
+        <button href="/admin" class="btn btn-sucesss">Back</button>
+      <%}%>
+    <%if(patients.length !== 0 ){%>
+        <!-- <div class="container"> -->
+          <%for( var i=0 ; i < patients.length ; i++){%>
+            <%if(i === 0 || (i % 2) === 0){%>
+              <div class="row">
+              <%}%>
+                
+            <div class="col-sm">
+             <form action="#" method="get">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label style="color: red;" for="firstName">First name</label>
+                            <input style="color: green;" class="form-control" type="text" value= <%=patients[i].firstName%> name="firstName" id="firstName">
+                         </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="form-group">
+                            <label style="color: red;" for="secondName">Second name</label>
+                            <input style="color: green;" class="form-control" type="text" value=<%=patients[i].secondName%> name="secondName" id="secondName">
+                       </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" type="text" name="email" value=<%=patients[i].email%> id="email">
+                </div>
+                <div class="form-group">
+                    <label for="mobileNo ">Phone No</label>
+                    <input class="form-control" type="text" value=<%=patients[i].mobileNo%> name="mobileNo" id="mobileNo">
+                </div>
+                <div class="form-group">
+                    <label for="treatmentType">TreatmentType</label>
+                    <input class="form-control" type="text" name="treatmentType" value=<%=patients[i].treatmentType%> id="treatmentType">
+                </div>
+                <div class="form-group">
+                    <label for="treatmentInfo">treatmentInfo</label>
+                    <textarea class="form-control" name="treatmentInfo" value=<%=patients[i].treatmentInfo%>id="treatmentInfo" cols="30" rows="3">
+                        <%=patients[i].treatmentInfo%>
+                    </textarea>
+                </div>
+        </form> 
+
+           </div>
+
+          <%if(i === 0 || (i % 2) === 0){%>
+                </div>
+            <%}%>
+        <!-- </div> -->
+        <%}%>
+      <%}%>
+  </body>
 </html>
 
 <!-- 

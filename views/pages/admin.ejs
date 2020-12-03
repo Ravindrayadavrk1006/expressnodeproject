@@ -4,13 +4,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <%- include('../parts/head.ejs')%>
     <link rel="stylesheet" href="/stylesheets/admin.css">
-    <script src="/"></script>
+    <title>OM DENTAL</title>
 </head>
 <body>
-    <!-- <%- include('../parts/header')%> -->
+     <!-- <%- include('../parts/header')%> -->
     <div id="sidebar" class="collapsed">
         <ul>
-            <a href="#">
+            <a href="/admin">
                 <li>Dashboard</li>
             </a>
             <a href="#">
@@ -40,6 +40,7 @@
                           <a class="dropdown-item" href="/admin/allPatients">All Patients</a>
                           <a class="dropdown-item" href="/admin/newPatient">Add Patient</a>
                           <a class="dropdown-item" href="/admin/deletePatient">Delete patient</a>
+                          <a class="dropdown-item" href="/admin/updatePatient">Update Patient</a>
                           <a href="/admin/findPatient" class="dropdown-item">View patient</a>
                         </div>
                       </div>
@@ -56,6 +57,10 @@
 
             <h2>Welcome Admin</h2>
             <h4>Cheers! you are making peoples smile confident</h4>
+
+             <br><br><br>
+             <h5>If u are free write a article</h5>
+             <a href="/admin/newsArticle"><button class="btn btn-success">Write Article</button></a>
             
     </div>
 

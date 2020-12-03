@@ -4,6 +4,8 @@
         <%- include('../../parts/head.ejs') %>
          <link rel="stylesheet" href="/stylesheets/aboutus.css">
          <link rel="stylesheet" href="/stylesheets/commonform.css">
+         <link rel="stylesheet" href="/stylesheets/finder.css">
+         <script src="/javascripts/finder.js"></script>
         </head>
     <body>
        
@@ -11,22 +13,34 @@
         <div>
             <%- include('../../parts/header.ejs') %>
         </div>
+        <a  href="/admin">
+            <button  class="btn btn-danger">Back</button>
+          </a>
         <h2 style="margin-left:30%;margin-top: 4%;">Find the patient</h2>
-        <form class="inputForm rounded-top rounded-bottom" action="/admin/findPatient" method="post">
+        <form autocomplete="off" class="inputForm rounded-top rounded-bottom" action="/admin/findPatient" method="post">
            <div class="row">
                <div class="col">
-                <div class="form-group">
+                <div class="form-group autocomplete">
                     <label for="firstName">first name</label>
-                    <input class="form-control" type="text" name="firstName" id="secondName">
+                    <input class="form-control" type="text" name="firstName" id="firstName">
                 </div>
                </div>
                <div class="col">
-                   <label for="secondName">second Name</label>
-                   <input class="form-control" type="text" name="secondName" id="secondName">
+                   <div class="form-group autocomplete">
+                        <label for="secondName">second Name</label>
+                        <input class="form-control" type="text" name="secondName" id="secondName">
+                    </div>
                </div>
            </div>
            <button class="btn btn-success" type="submit">Show</button>
         </form>
-        
+        <script type="text/javascript">  
+            var firstNameArray= `<%-firstNameArray%>`
+            var secondNameArray= `<%-secondNameArray%>`
+            var firstNameArray=firstNameArray.split(',')
+            var secondNameArray=secondNameArray.split(',');
+            autocomplete(document.getElementById('firstName'),firstNameArray);
+            autocomplete(document.getElementById('secondName'),secondNameArray);
+        </script>
     </body>
 </html>

@@ -1,0 +1,24 @@
+*
+{
+    font-family: 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;  
+}
+body
+{
+    background-color: rgb(240, 235, 231);
+}
+form
+{
+    height: 100px;
+    /* width:40%; */
+}
+label
+{
+    color: blueviolet;
+}
+input
+{
+    color: green;
+}

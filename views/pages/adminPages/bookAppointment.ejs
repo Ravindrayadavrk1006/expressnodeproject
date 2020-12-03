@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="/stylesheets/bookAppointment.css">
 </head>
 <body>
+    <div>
+        <%- include('../../parts/header.ejs') %>
+    </div>
+    <a  href="/admin">
+        <button  class="btn btn-danger">Back</button>
+      </a>
     <h3>Book Appointment</h3>
     <div class="appointmentForm">
         <form action="/admin/bookAppointment" method="post">

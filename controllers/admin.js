@@ -2,7 +2,35 @@
 const Patient=require('../models/newPatient')
 const bookAppointment=require('../models/appointment')
 const {validationResult}=require('express-validator');
+const multer=require('multer')
+const path=require('path')
+const fs=require('fs');
+const askForAppointment=require('../models/askForAppointment');
+var gfirstName='';
+var gsecondName='';
 exports.addPatients=(req,res)=>{
+        // var wait=async function()
+        // {
+        //     setInterval(()=>{},3000)
+        //     await wait()
+        //     clearInterval()
+        // }
+
+        var temp=req['files'];
+        // console.log(temp);
+        // console.log(temp)
+        // console.log('req.body=>'+req.body);
+        // console.log('req.files=>',+req.file)
+        var images=[]
+        var length=temp.length;
+        for(image of temp)
+        {
+            images.push({
+                data:fs.readFileSync(path.join(image['path'])),
+                contentType:'image/png'
+            })
+        }
+        // console.log(images);
        let tempObj={
            firstName:req.body.firstName,
            secondName:req.body.secondName,
@@ -10,13 +38,17 @@ exports.addPatients=(req,res)=>{
            DOB:req.body.Dob,
            email:req.body.email,
            treatmentType:req.body.treatmentType,
-           treatmentInfo:req.body.treatmentInfo
+           treatmentInfo:req.body.treatmentInfo,
+           images:images
        }
-       console.log(tempObj);
+
+       
+    //    console.log("the data before stroring to the db",tempObj)
        const aPatient=new Patient(tempObj)
        aPatient
         .save()
         .then(result=>{
+           
             console.log("data saved to the db");
             res.redirect('/admin')
             // res.render('\admin',{msg:"patient added succesfully SUCCESSFULLY!"})
@@ -32,7 +64,6 @@ exports.bookAppointment=((req,res)=>{
         email:req.body.email,
         mobileNo:req.body.mobileNo,
     }
-    console.log(tempObj);
     let newAppointment=new bookAppointment(tempObj)
     newAppointment
         .save()
@@ -56,7 +87,20 @@ exports.allPatients=(req,res)=>{
     })
 }
 exports.getdeletePatient=(req,res)=>{
-    res.render('pages/adminPages/deletePatient');
+    Patient.find({},(err,result)=>{
+        if(err) throw new Error(err)
+        firstNameArray=[];
+        secondNameArray=[]
+        for(appointment of result)
+        {
+            firstNameArray.push(appointment.firstName);
+            secondNameArray.push(appointment.secondName);
+        }
+        // console.log(firstNameArray);
+        // console.log(secondNameArray);
+        res.render('pages/adminPages/deletePatient',{firstNameArray:firstNameArray,secondNameArray:secondNameArray})
+
+    })
 }
 exports.deletePatient=(req,res)=>{
     var firstName=req.body.firstName;
@@ -75,16 +119,23 @@ exports.deletePatient=(req,res)=>{
 exports.updatePatientInfo=(req,res)=>{
     var firstName=req.body.firstName;
     var secondName=req.body.secondName;
-    Patient.findOne({firstName:firstName,secondName:secondName},(err,result)=>{
-        console.log(result);
-        var oldTreatmentType=result.treatmentType;
-        var oldTreatmentInfo=result.treatmentInfo;
-        var newTreatmentType=req.body.treatmentType;
-        var newTreatmentInfo=req.body.treatmentInfo;
-        var treatmentType=newTreatmentType;
-        var treatmentInfo=oldTreatmentInfo+ " " + newTreatmentInfo
-        Patient.updateOne({firstName:firstName,secondName:secondName},{$set:{treatmentInfo:treatmentInfo,treatmentType:treatmentType}},{upsert:true});
-    }) 
+    var mobileNo=req.body.mobileNo;
+    var email=req.body.email;
+    var treatmentType=req.body.treatmentType;
+    var treatmentInfo=req.body.treatmentInfo;
+        Patient.updateOne({firstName:gfirstName,secondName:gsecondName},{$set:
+            {
+                firstName:firstName,
+                secondName:secondName,
+                treatmentInfo:treatmentInfo,
+                treatmentType:treatmentType,
+                mobileNo:mobileNo,
+                email:email,
+            }},{upsert:true},(err,result)=>{
+                if(err) throw new Error(err)
+                console.log('date edited succesfully !!!')
+            });
+        
     res.redirect('/admin');
 }
 exports.allAppointments=(req,res)=>{
@@ -93,7 +144,19 @@ exports.allAppointments=(req,res)=>{
     })
 }
 exports.getcancelAppointment=(req,res)=>{
-    res.render('pages/adminPages/cancelAppointment')
+    bookAppointment.find({},(err,result)=>{
+        if(err) throw new Error(err)
+        firstNameArray=[];
+        secondNameArray=[]
+        for(appointment of result)
+        {
+            firstNameArray.push(appointment.firstName);
+            secondNameArray.push(appointment.secondName);
+        }
+        res.render('pages/adminPages/cancelAppointment',{firstNameArray:firstNameArray,secondNameArray:secondNameArray})
+
+    })
+    
 }
 exports.cancelAppointment=(req,res)=>{
     var firstName=req.body.firstName;
@@ -106,7 +169,18 @@ exports.cancelAppointment=(req,res)=>{
     
 }
 exports.getupdateAppointment=(req,res)=>{
-    res.render('pages/adminPages/updateAppointment')
+    bookAppointment.find({},(err,result)=>{
+        if(err) throw new Error(err)
+        firstNameArray=[];
+        secondNameArray=[]
+        for(appointment of result)
+        {
+            firstNameArray.push(appointment.firstName);
+            secondNameArray.push(appointment.secondName);
+        }
+        res.render('pages/adminPages/updateAppointment',{firstNameArray:firstNameArray,secondNameArray:secondNameArray,})
+
+    })
 }
 exports.updateAppointment=(req,res)=>{
     var firstName=req.body.firstName;
@@ -122,13 +196,102 @@ exports.findPatient=(req,res)=>{
     var firstName=req.body.firstName;
     var secondName=req.body.secondName;
      Patient.findOne({firstName:firstName,secondName:secondName},(err,result)=>{
-         console.log(result);
-         res.render(`pages/adminPages/showPatient`,{patient:result});
+       if(err) throw new Error(err)
+
+        console.log(result);
+        res.render(`parts/detailPage`,{title:'patient detail',patient:result});
+         
      })
 }
 exports.getfindPatient=(req,res)=>{
-    res.render('pages/adminPages/findPatient')
+    Patient.find({},(err,result)=>{
+        if(err) throw new Error(err)
+        firstNameArray=[];
+        secondNameArray=[]
+        for(appointment of result)
+        {
+            firstNameArray.push(appointment.firstName);
+            secondNameArray.push(appointment.secondName);
+        }
+        // console.log(firstNameArray);
+        // console.log(secondNameArray);
+        res.render('pages/adminPages/findPatient',{firstNameArray:firstNameArray,secondNameArray:secondNameArray})
+
+    })
 }
-exports.getupdatePatientInfo=(req,res)=>{
-    res.render('pages/adminPages/updatePatientInfo');
+exports.getupdatePatient=(req,res)=>{
+    Patient.find({},(err,result)=>{
+        if(err) throw new Error(err)
+        firstNameArray=[];
+        secondNameArray=[]
+        for(appointment of result)
+        {
+            firstNameArray.push(appointment.firstName);
+            secondNameArray.push(appointment.secondName);
+        }
+        // console.log(firstNameArray);
+        // console.log(secondNameArray);
+        res.render('pages/adminPages/updatePatient',{firstNameArray:firstNameArray,secondNameArray:secondNameArray})
+
+    })
+}
+exports.updatePatient=(req,res)=>{
+    var firstName=req.body.firstName;
+    var secondName=req.body.secondName;
+    gfirstName=firstName;
+    gsecondName=secondName
+
+    Patient.find({firstName:firstName,secondName:secondName},(err,result)=>{
+        if(err) throw new Error(err);
+        // console.log('data from the updatePatient controllers',result);
+        res.render('pages/adminPages/updatePatientInfo',{patient:result});
+    })
+}
+// exports.getupdatePatientInfo=(req,res)=>{
+//     Patient.find({},(err,result)=>{
+//         if(err) throw new Error(err)
+//         firstNameArray=[];
+//         secondNameArray=[]
+//         for(appointment of result)
+//         {
+//             firstNameArray.push(appointment.firstName);
+//             secondNameArray.push(appointment.secondName);
+//         }
+//         resultArray=[]
+//         for(pat of result)
+//         {
+//             resultArray.push(pat)
+//         }
+//         res.render('pages/adminPages/updatePatientInfo',{patients:resultArray,firstNameArray:firstNameArray,secondNameArray:secondNameArray})
+//     })
+
+
+// }
+var allAppoitmentArray=[]
+exports.formUpload=(req,res)=>{
+    var date=req.body.date;
+    var dateArray=date.split('T');
+    var obj={
+        firstName:req.body.firstName,
+        secondName:req.body.secondName,
+        date:dateArray[0],
+        time:dateArray[1],
+        email:req.body.email,
+        treatmentneeded:req.body.treatmentneeded,
+        treatmentDesc:req.body.notes
+    }    
+    var askForAppointmentObj=new askForAppointment(obj);
+    askForAppointmentObj
+        .save()
+        .then(result=>{
+            console.log("patient asked for appointment");
+            res.redirect('/')
+        })
+        .catch(err=>{
+            if(err) throw new Error(err);
+        })
+    
+}
+exports.getnewsArticle=(req,res)=>{
+    res.render('pages/newsArticle');
 }

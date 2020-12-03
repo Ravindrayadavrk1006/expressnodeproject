@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Book appointment</title>
+        <title>OM DENTALS</title>
         <link rel="stylesheet" href="/stylesheets/index.css">
         <%- include('../../parts/head.ejs') %>
         <link rel="stylesheet" href="/stylesheets/newPatient.css">
@@ -12,6 +12,10 @@
     <div>
         <%- include('../../parts/header.ejs') %>
     </div>
+    <a  href="/admin">
+      <button  class="btn btn-danger">Back</button>
+    </a>
+    
     <div class="container">
         <% for(var i = 0; i < appointments.length; i++) { %>
             <% if (i === 0 || i % 3 === 0) { %>

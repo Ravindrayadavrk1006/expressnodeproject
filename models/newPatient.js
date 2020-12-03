@@ -1,10 +1,15 @@
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
+var ImageSchema=new Schema({
+    img:Buffer,
+    contentType:String
+})
+var image=mongoose.model('image',ImageSchema);
 var Patient=new Schema({
     firstName:
     {
         type:String,
-        required:true
+        required:false
     },
     secondName:
     {
@@ -36,6 +41,13 @@ var Patient=new Schema({
     {
         type:String,
         default:new Date()
+    },
+    images:
+    {    type:[{
+            data:Buffer,
+            contentType:String
+        }],
+         required:false
     }
 
 })
