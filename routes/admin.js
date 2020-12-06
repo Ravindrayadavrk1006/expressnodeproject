@@ -14,6 +14,31 @@ var storage=multer.diskStorage({
       cb(null,firstName+secondName+'_'+file.originalname);
   }
 })
+var newsStorage=multer.diskStorage({
+  destination:function(req,file,cb)
+  {
+    cb(null,'./public/newsImages/mainImages/')
+  },
+  filename:function(req,file,cb)
+  {
+    var title=req.body.title;
+    // var subHeading=req.body.subHeading;
+    cb(null,subHeading+Date.now()+'_'+file.originalname);
+  }
+})
+var newsStorage1=multer.diskStorage({
+  destination:function(rq,file,cb)
+  {
+    cb(null,'./public/newsImages/mainImages/')
+  },
+  filename: function(req,file,cb)
+  {
+    var title=req.body.title;
+    cb(null,title+Date.now()+'_'+file.originalname);
+  }
+})
+var newsUpload=multer({storage:newsStorage}).array('img',20);
+var newsArticleImages=multer({storage:newsStorage1}).array('articleImages',20);
 var upload=multer({storage:storage}).array('images',100);
 // var upload=multer({dest:'./public/uploads/'})
 router.get('/bookAppointment',(req,res)=>{
@@ -42,5 +67,5 @@ router.get('/',(req,res)=>{
     res.render('pages/admin',{msg:''})
   })
 router.get('/newsArticle',controllers.getnewsArticle);
-// router.post('/newsArticle',controllers.postnewsArticle)
+router.post('/newsArticle',controllers.postnewsArticle)
 module.exports=router;

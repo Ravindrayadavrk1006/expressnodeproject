@@ -56,21 +56,25 @@
                     <%=patient.treatmentInfo%>
                 </textarea>
             </div>
-            <div class="images">
+            <div  class="images">
                 <% for(each of patient.images){%>
                     <img id="image" src="data:image/<%=each.contentType%>;base64,
                      <%=each.data.toString('base64')%>">
-                     <br>
                     <%}%>
             </div>
         <%}%>
     </form>
     <style>
+        .images
+        {
+           border:4px solid black;
+
+        }
         #image
         {
-            height:30%;
-            width: 100%;
-            margin-bottom: 10%;
+            height:100%;
+            width: 30%;
+            /* margin-bottom: 10%; */
             /* width: 300px; */
         }
     </style>

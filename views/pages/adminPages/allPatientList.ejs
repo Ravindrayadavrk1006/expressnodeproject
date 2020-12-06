@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../../parts/head.ejs') %>
+
+</head>
+<body>
+    
+        <h1>ALL Patient</h1>
+    <ul class="list-group">
+        
+        <%for(patient of patients){%>
+            
+            <li class="list-group-item">
+                
+                    <form action="/admin/findPatient" method="POST">
+                        <div>
+                    <button >
+                    <input value="<%-patient.firstName%>" type="text" name="firstName" id="firstName">
+                    <span>
+                    <input value="<%-patient.secondName%>" type="text" name="secondName" id="secondName">
+                    </span>
+                    </button>
+                </div>
+                     </form>
+            </li>
+           <%}%>
+    </ul>
+    <style>
+        li
+        {
+            padding: none;
+        }
+        input
+        {
+            border: none;
+        }
+        button
+        {
+            position: inherit;
+            height:20vh
+        }
+        ul
+        {
+            margin-left: 30%;
+            margin-right: 30%;
+            /* width: 40%; */
+            font:20px;
+            color: grey;
+        }
+        
+    </style>
+    <script>
+
+       $('li').hover(
+           function()
+           {
+               $(this).addClass('active')
+           },
+           function()
+           {
+               $(this).removeClass('active')
+           }
+       )
+           $('button').hover(
+               function()
+               {
+                   $(this).addClass('btn btn-primary')
+               },
+               function()
+               {
+                   $(this).removeClass('btn btn-primary')
+               }
+           )
+    </script>
+</body>
+</html>

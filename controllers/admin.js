@@ -8,6 +8,19 @@ const fs=require('fs');
 const askForAppointment=require('../models/askForAppointment');
 var gfirstName='';
 var gsecondName='';
+var newsStorage=multer.diskStorage({
+    destination:function(req,file,cb)
+    {
+      cb(null,'./public/newsImages/mainImages/')
+    },
+    filename:function(req,file,cb)
+    {
+      var title=req.body.title;
+      var subHeading=req.body.subHeading;
+      cb(null,title+Date.now()+'_'+file.originalname);
+    }
+  })
+  var newsUpload=multer({storage:newsStorage}).array('img',20);
 exports.addPatients=(req,res)=>{
         // var wait=async function()
         // {
@@ -41,8 +54,6 @@ exports.addPatients=(req,res)=>{
            treatmentInfo:req.body.treatmentInfo,
            images:images
        }
-
-       
     //    console.log("the data before stroring to the db",tempObj)
        const aPatient=new Patient(tempObj)
        aPatient
@@ -80,10 +91,21 @@ exports.bookAppointment=((req,res)=>{
 })
 exports.allPatients=(req,res)=>{
     Patient.find({},(err,result)=>{
-        if(err) throw new Error 
+        if(err) throw new Error(err) 
         else
-        console.log(result)
-        res.render('pages/adminPages/allPatients',{patients:result})
+        // console.log(result)
+        var names=[]
+        for(each of result)
+        {
+            names.push({
+                firstName:each.firstName,
+                secondName:each.secondName
+            })
+        }
+        // res.render('pages/adminPages/allPatients',{patients:result})
+        res.render('pages/adminPages/allPatientList',{patients:names})
+        // console.log(names);
+
     })
 }
 exports.getdeletePatient=(req,res)=>{
@@ -195,6 +217,7 @@ exports.updateAppointment=(req,res)=>{
 exports.findPatient=(req,res)=>{
     var firstName=req.body.firstName;
     var secondName=req.body.secondName;
+    console.log(firstName," ",secondName);
      Patient.findOne({firstName:firstName,secondName:secondName},(err,result)=>{
        if(err) throw new Error(err)
 
@@ -294,4 +317,17 @@ exports.formUpload=(req,res)=>{
 }
 exports.getnewsArticle=(req,res)=>{
     res.render('pages/newsArticle');
+}
+exports.postnewsArticle=(req,res)=>{
+    newsUpload
+    var mainImage=req['files']
+    console.log(mainImage);
+    var tempObj={
+        title:req.body.title,
+        subHeading:req.body.subHeading,
+        article:req.body.article,
+        
+    }
+    console.log(tempObj);
+    res.redirect('/admin')
 }

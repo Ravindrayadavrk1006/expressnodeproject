@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Book appointment</title>
+        <title>OM DENTALS</title>
         <!-- <link rel="stylesheet" href="/stylesheets/index.css"> -->
         <%- include('../../parts/head.ejs') %>
         <!-- <link rel="stylesheet" href="/stylesheets/newPatient.css"> -->
@@ -92,6 +92,18 @@
                         <%=patients[i].treatmentInfo%>
                     </textarea>
                 </div>
+                <!-- images -->
+                      <div  class="images">
+                        <%if(patients[i].images){%>
+  
+                        <% for(each of patients[i].images){%>
+                            <img id="image" src="data:image/<%=each.contentType%>;base64,
+                            <%=each.data.toString('base64')%>">
+                            <br>
+                            <%}%>
+                            <%}%>
+                    </div>
+                    <!-- edited -->
         </form> 
 
            </div>
@@ -102,10 +114,20 @@
         <!-- </div> -->
         <%}%>
       <%}%>
+      <style>
+        .images
+        {
+           border:4px solid black;
+            
+        }
+        #image
+        {
+            height:10%;
+            width: 100%;
+            margin-bottom: 10%;
+            /* width: 300px; */
+        }
+    </style>
   </body>
 </html>
 
-<!-- 
-<div class="col-sm">
-    
-</div> -->
