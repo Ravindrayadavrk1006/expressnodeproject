@@ -30,4 +30,4 @@ Backend Services Implemented:
 6.	Used routes style
 7.	MVC style 
 8.	Express server is used
-9.	Front-end done using bootstrap,css and html
+9.	Front-end done using bootstrap,css and html using the view-engine as ejs 
