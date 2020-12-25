@@ -161,7 +161,8 @@ exports.updatePatientInfo=(req,res)=>{
     res.redirect('/admin');
 }
 exports.allAppointments=(req,res)=>{
-    bookAppointment.find({},(err,result)=>{
+    bookAppointment.find().sort({dateTime:-1}).exec((err,result)=>{
+        console.log(result)
         res.render('pages/adminPages/allAppointments',{appointments:result})
     })
 }
@@ -302,7 +303,7 @@ exports.formUpload=(req,res)=>{
         email:req.body.email,
         treatmentneeded:req.body.treatmentneeded,
         treatmentDesc:req.body.notes
-    }    
+    }   
     var askForAppointmentObj=new askForAppointment(obj);
     askForAppointmentObj
         .save()
@@ -314,6 +315,17 @@ exports.formUpload=(req,res)=>{
             if(err) throw new Error(err);
         })
     
+}
+exports.getallAskedForAppointment=()=>{
+    askForAppointment.find().sort({date:-1}).exec((err,result)=>{
+        if(err) throw new Error(err)
+        console.log(result);
+    })
+    // askForAppointment.find({},(err,result)=>{
+    //     if(err) throw new Error(err)
+    //     console.log(result);
+        
+    // })
 }
 exports.getnewsArticle=(req,res)=>{
     res.render('pages/newsArticle');

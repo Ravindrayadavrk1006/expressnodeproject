@@ -1,6 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const controllers=require('../controllers/admin');
+const {ensureAuthenticated,adminAuth}=require('../config/auth');
 const multer=require('multer');
 var storage=multer.diskStorage({
   destination:function(req,file,cb)
@@ -41,7 +42,7 @@ var newsUpload=multer({storage:newsStorage}).array('img',20);
 var newsArticleImages=multer({storage:newsStorage1}).array('articleImages',20);
 var upload=multer({storage:storage}).array('images',100);
 // var upload=multer({dest:'./public/uploads/'})
-router.get('/bookAppointment',(req,res)=>{
+router.get('/bookAppointment',[ensureAuthenticated,adminAuth],(req,res)=>{
     res.render('pages/adminPages/bookappointment')
   })
 router.get('/newPatient',(req,res)=>{
@@ -63,9 +64,10 @@ router.get('/cancelAppointment',controllers.getcancelAppointment);
 router.post('/cancelAppointment',controllers.cancelAppointment);
 router.get('/updateAppointment',controllers.getupdateAppointment);
 router.post('/updateAppointment',controllers.updateAppointment);
-router.get('/',(req,res)=>{
+router.get('/',[ensureAuthenticated,adminAuth],(req,res)=>{
     res.render('pages/admin',{msg:''})
   })
+router.get('/allAskedForAppointment',controllers.getallAskedForAppointment);  
 router.get('/newsArticle',controllers.getnewsArticle);
 router.post('/newsArticle',controllers.postnewsArticle)
 module.exports=router;

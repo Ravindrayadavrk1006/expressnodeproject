@@ -1,0 +1,25 @@
+<%- include('./head.ejs')%>
+<%if (typeof errors != 'undefined'){%>
+    <%errors.forEach(function(error){ %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong><%= error.msg%></strong> 
+          </div>
+    <%})%>
+    <%}%>
+
+<% if(success_msg != ''){%>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong><%= success_msg%></strong> .
+        
+      </div>
+<%}%>
+<% if(error_msg != ''){%>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong><%= error_msg%></strong> 
+      </div>
+<%}%>
+<% if(error != ''){%>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong><%= error %></strong> 
+      </div>
+<%}%>

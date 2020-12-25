@@ -1,0 +1,44 @@
+
+.col-5
+{
+    color: white;
+    height:100vh;
+    background-color:#4f9c72;
+    padding-top: 30vh;
+    
+}
+.signinInput
+{
+    width: 20vw;
+}
+label
+{
+    text-align: center;
+}
+.col-7
+{
+    padding-left: 5vw;
+    padding-top: 5vh;
+}
+.signupInput
+{
+    width: 40vw;
+}
+.singupInput:hover
+{
+    border: 1px solid green;
+}
+h2
+{
+    color: blueviolet;
+    padding-bottom: 2vh;
+}
+#signUpSub
+{
+    color: grey;
+    padding-bottom: 2vh;
+}
+.signupBtn
+{
+    width: 55.5vw;
+}
