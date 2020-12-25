@@ -7,7 +7,7 @@ const cont=require('./controllers/admin')
 const userRoutes=require('./routes/users')
 const flash=require('connect-flash');
 const session=require('express-session')
-const port=3001
+const port=process.env.PORT||3001
 const app=express();
 const passport=require('passport');
 app.use(bodyParser.urlencoded({extended:true}));
