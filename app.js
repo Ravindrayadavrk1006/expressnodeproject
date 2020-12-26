@@ -36,6 +36,8 @@ app.use((req,res,next)=>{
 const multer=require('multer');
 databaseName='OmDentals'
 const url=`mongodb://localhost:27017/${databaseName}`
+const mongoUrl=process.env.MONGODB_URI || url
+
 app.set('view engine','ejs');
 // app.set('view',)
 app.use(express.static(__dirname+'/public'))
@@ -67,7 +69,7 @@ app.get('/',(req,res,next)=>{
 //   res.render('parts/detailPage',{title:'student Detail'});
 // })
 //connecting to dbase and inside it connecting to the express server inside the mongoose promise
-mongoose.connect(url,{
+mongoose.connect(mongoUrl,{
   useNewUrlParser:true,
   useUnifiedTopology:true,
 })
