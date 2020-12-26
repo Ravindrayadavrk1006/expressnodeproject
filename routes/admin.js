@@ -43,7 +43,7 @@ var newsArticleImages=multer({storage:newsStorage1}).array('articleImages',20);
 var upload=multer({storage:storage}).array('images',100);
 // var upload=multer({dest:'./public/uploads/'})
 router.get('/bookAppointment',[ensureAuthenticated,adminAuth],(req,res)=>{
-    res.render('pages/adminPages/bookappointment')
+    res.render('pages/adminPages/bookAppointment')
   })
 router.get('/newPatient',(req,res)=>{
     res.render('pages/adminPages/newPatient')
