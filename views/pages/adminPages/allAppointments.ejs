@@ -18,7 +18,7 @@
     <%if(appointments.length===0){%>
       <h3>NO APPOINTMENT FOUND!!!</h3>
       <%}%>
-    <%else{%>
+    <%if(appointments.length !== 0) {%>
       
     <!-- <div class="container">
         <% for(var i = 0; i < appointments.length; i++) { %>
@@ -47,6 +47,31 @@
           <% } %>
     
     </div> -->
+        <ul class="list-group">
+          <%for(var i=0;i < appointments.length;i++){%>
+            <!-- <%console.log(appointments[i])%> -->
+          <li class="list-group-item">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= appointments[i].firstName %>  <%=appointments[i].secondName %>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+
+                  <% var timeArray=(appointments[i].dateTime).split("T")%>
+                            date: <%=timeArray[0]%> <br>
+                            time: <%= timeArray[1]%>
+                </h6>
+                <p >
+                  Email <%= appointments[i].email %> <br>
+                  MobileNo <%= appointments[i].mobileNo%>
+                </p>
+              </div>
+            </div>
+
+          </li>
+          <%}%>
+        </ul>
     <%}%>
 </body>
 </html>

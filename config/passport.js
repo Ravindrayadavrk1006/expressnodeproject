@@ -23,7 +23,6 @@ module.exports=function(passport){
                     // }
                     if(isMatch)
                     {
-                        console.log("from the passport file",user)
                         return done(null,user)
                     }
                     

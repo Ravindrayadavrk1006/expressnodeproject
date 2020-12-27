@@ -301,6 +301,7 @@ exports.formUpload=(req,res)=>{
         date:dateArray[0],
         time:dateArray[1],
         email:req.body.email,
+        mobileNo:req.body.mobileNo,
         treatmentneeded:req.body.treatmentneeded,
         treatmentDesc:req.body.notes
     }   
@@ -316,10 +317,11 @@ exports.formUpload=(req,res)=>{
         })
     
 }
-exports.getallAskedForAppointment=()=>{
-    askForAppointment.find().sort({date:-1}).exec((err,result)=>{
+exports.getallAskedForAppointment=(req,res)=>{
+    askForAppointment.find().sort({date:-1,time:-1}).exec((err,result)=>{
         if(err) throw new Error(err)
-        console.log(result);
+        // console.log(result);
+         res.render('pages/adminPages/allAskedAppointments',{appointments:result})
     })
     // askForAppointment.find({},(err,result)=>{
     //     if(err) throw new Error(err)
@@ -342,4 +344,28 @@ exports.postnewsArticle=(req,res)=>{
     }
     console.log(tempObj);
     res.redirect('/admin')
+}
+exports.confirmThisAppointment=(req,res)=>{
+   var StringObj=req.body.appointment;
+   var jsonObj=JSON.parse(StringObj);
+//    console.log(jsonObj);
+   var dateTime=jsonObj.date+"T"+jsonObj.time;
+//    console.log(dateTime);
+   var tempObj={
+       firstName:jsonObj.firstName,
+       secondName:jsonObj.secondName,
+       dateTime:dateTime,
+       email:jsonObj.email,
+       mobileNo:jsonObj.mobileNo,
+   }
+   var bookAppointmentObj=new bookAppointment(tempObj)
+   bookAppointmentObj
+        .save()
+        .then(result=>{
+            console.log(result)
+            res.redirect('/admin')
+        })
+        .catch(err=>{
+            if(err) throw new Error(err);
+        })
 }

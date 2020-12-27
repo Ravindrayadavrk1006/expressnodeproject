@@ -70,4 +70,5 @@ router.get('/',[ensureAuthenticated,adminAuth],(req,res)=>{
 router.get('/allAskedForAppointment',[ensureAuthenticated,adminAuth],controllers.getallAskedForAppointment);  
 router.get('/newsArticle',controllers.getnewsArticle);
 router.post('/newsArticle',[ensureAuthenticated,adminAuth],controllers.postnewsArticle)
+router.post('/confirmThisAppointment',controllers.confirmThisAppointment);
 module.exports=router;

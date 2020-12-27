@@ -16,6 +16,10 @@ const askForAppointmentSchema=new Schema({
         type:String,
         required:true,
     },
+    mobileNo:
+    {
+        type:String,
+    },
     date:
     {
         type:String,

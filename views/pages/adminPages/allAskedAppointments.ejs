@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>OM DENTALS</title>
+        <link rel="stylesheet" href="/stylesheets/index.css">
+        <%- include('../../parts/head.ejs') %>
+        <link rel="stylesheet" href="/stylesheets/newPatient.css">
+    </head>
+<body>
+    <div>
+        <%- include('../../parts/header.ejs') %>
+    </div>
+    <a  href="/admin">
+      <button  class="btn btn-danger">Back</button>
+    </a>
+    <%if(appointments.length===0){%>
+      <h3>NO APPOINTMENT FOUND!!!</h3>
+      <%}%>
+    <%if(appointments.length !== 0) {%>
+      
+    <ul class="list-group">
+          <%for(var i=0;i < appointments.length;i++){%>
+            <% var tempObj=JSON.stringify(appointments[i])
+            %>
+          <li class="list-group-item">
+            <form action="/admin/confirmThisAppointment" method="post">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= appointments[i].firstName %>  <%=appointments[i].secondName %>
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">             
+                            date: <%=appointments[i].date%> <br>
+                            time: <%=appointments[i].time%>
+                </h6>
+                <p >
+                  Email <%= appointments[i].email %> <br>
+                  MobileNo <%= appointments[i].mobileNo%>
+                </p>
+              </div>
+            </div>
+            
+            <input hidden type="text" name="appointment" id="appointment" value="<%= tempObj %>">
+            <button class="btn btn-primary">Confirm </button>
+          </li>
+         
+        </form>
+          <%}%>
+        </ul>
+    <%}%>
+</body>
+</html>
+
+<!-- 
+<div class="col-sm">
+    
+</div> -->
