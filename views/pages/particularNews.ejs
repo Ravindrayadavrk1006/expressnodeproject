@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <%- include('../parts/head.ejs') %>
+  <link rel="stylesheet" href="/stylesheets/particularNews.css">
+  <title>OM DENTALS</title>
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+ <!-- navbar -->
+ <div>
+  <%- include('../parts/header.ejs') %>
+ </div>
+  <div class="news">
+     <div class="top">
+        <div class="titleImages">
+         <%if(news.titleImages){%>
+        
+          <% for(each of news.titleImages){%>
+           <img class="titleImg" src="data:image/<%=each.contentType%>;base64,
+                    <%=each.data.toString('base64')%>">
+           <br>
+           <%}%>
+            <%}%>
+        </div>
+        <div class="titleParts">
+         <h2 id="heading">
+          <%= news.title%>
+         </h2>
+         <h5 id="subHeading">
+          <%= news.subHeading%>
+         </h5>
+         <p id="date">
+          Date: <%= news.date%>
+         </p>
+
+        </div>
+        
+
+     </div>
+    
+     <section class="article">
+          <%= news.article%>
+     </section>
+     <div class="articleImages">
+       
+        <%if(news.articleImages){%>
+       
+         <% for(each of news.articleImages){%>
+          <img class="articImg" id="articImg" src="data:image/<%=each.contentType%>;base64,
+                   <%=each.data.toString('base64')%>">
+          <br>
+          <%}%>
+           <%}%>
+  
+     </div>
+  </div>
+
+  <!-- footer -->
+  <%- include('../parts/footer.ejs') %>
+ </body>
+ </html>

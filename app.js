@@ -48,15 +48,16 @@ app.use('/user',userRoutes);
 app.get('/aboutUs',(req,res)=>{
   res.render('pages/aboutus')
 })
-app.get('/news',(req,res)=>{
-  res.render('pages/news')
-})
+app.get('/news/newsArticle/:title',cont.particularArticle);
+app.get('/news/:page',cont.getnewsArticle);
 app.get('/services',(req,res)=>{
   res.render('pages/services')
 })
 app.get('/contactUs',(req,res)=>{
   res.render('pages/contactUs')
 })
+
+
 // allAppoitmentArray=[];
 app.post('/formupload',cont.formUpload);
 // app.use((req,res,next)=>{

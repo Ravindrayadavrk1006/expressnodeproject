@@ -18,30 +18,33 @@ var storage=multer.diskStorage({
 var newsStorage=multer.diskStorage({
   destination:function(req,file,cb)
   {
-    cb(null,'./public/newsImages/mainImages/')
+    if(file.fieldname=='titleImg')
+    {
+      cb(null,'./public/newsImages/mainImages/')
+    }
+    else{
+       cb(null,'./public/newsImages/detailImages/')
+    }
+    
   },
   filename:function(req,file,cb)
   {
-    var title=req.body.title;
-    // var subHeading=req.body.subHeading;
-    cb(null,subHeading+Date.now()+'_'+file.originalname);
+        var title=req.body['title'];
+        cb(null,title+'_'+file.originalname);
+    
+      
   }
 })
-var newsStorage1=multer.diskStorage({
-  destination:function(rq,file,cb)
-  {
-    cb(null,'./public/newsImages/mainImages/')
-  },
-  filename: function(req,file,cb)
-  {
-    var title=req.body.title;
-    cb(null,title+Date.now()+'_'+file.originalname);
-  }
-})
-var newsUpload=multer({storage:newsStorage}).array('img',20);
-var newsArticleImages=multer({storage:newsStorage1}).array('articleImages',20);
+
+var newsUpload=multer({storage:newsStorage})
+
+// var newsUpload2=multer({storage:newsStorage1}).array('articleImages',20);
+
+//  FOR ADD PATIENT ROUTE
 var upload=multer({storage:storage}).array('images',100);
-// var upload=multer({dest:'./public/uploads/'})
+router.post('/newsArticle',
+  newsUpload.fields([{name:'titleImg',maxCount:1},{name:'articleImages',maxCount:10}])
+,controllers.postnewsArticle)
 router.get('/bookAppointment',[ensureAuthenticated,adminAuth],(req,res)=>{
     res.render('pages/adminPages/bookAppointment')
   })
@@ -68,7 +71,7 @@ router.get('/',[ensureAuthenticated,adminAuth],(req,res)=>{
     res.render('pages/admin',{msg:''})
   })
 router.get('/allAskedForAppointment',[ensureAuthenticated,adminAuth],controllers.getallAskedForAppointment);  
-router.get('/newsArticle',controllers.getnewsArticle);
-router.post('/newsArticle',[ensureAuthenticated,adminAuth],controllers.postnewsArticle)
-router.post('/confirmThisAppointment',controllers.confirmThisAppointment);
+router.get('/newsArticle',[ensureAuthenticated,adminAuth],controllers.getwriteArticle);
+
+router.post('/confirmThisAppointment',[ensureAuthenticated,adminAuth],controllers.confirmThisAppointment);
 module.exports=router;

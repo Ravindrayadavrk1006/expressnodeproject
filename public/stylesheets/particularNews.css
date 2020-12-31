@@ -1,0 +1,55 @@
+*
+{
+ border: 0;
+ margin: 0;
+ box-sizing: border-box;
+}
+.news
+{
+ font-family: 'Merriweather', serif;
+
+}
+.titleImg
+{
+ height:70vh;
+ width: 100%;
+ margin-bottom: 5vh;
+}
+#heading
+{
+   font-size: 10vh;
+   text-align: center;
+   position: relative;
+   
+}
+#subHeading
+{
+ font-size: 7vh;
+ text-align: center;
+ color: grey;
+}
+#date
+{
+ position: relative;
+ left:60vw;
+ font-size: 3vh;
+ color: grey;
+}
+.article
+{
+  margin-top: 15vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  margin-bottom:5vh;
+}
+.articleImages
+{
+ 
+ margin-bottom: 5vh;
+}
+.articImg
+{
+  display: block;
+  height: 30vh;
+  width: 100%;
+}

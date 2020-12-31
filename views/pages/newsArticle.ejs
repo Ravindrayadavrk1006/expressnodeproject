@@ -7,10 +7,7 @@
 <body>
     <h2 style="text-align: center;">Write Article</h2>
     <form style="margin: 10%;" action="/admin/newsArticle" enctype="multipart/form-data"  method="post">
-        <div class="form-group">
-            <label for="img">Main Image</label>
-            <input class="form-control" type="file" name="img" id="img">
-        </div>
+        
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" name="title" id="title">
@@ -22,6 +19,10 @@
         <div class="form-group">
             <label for="article">Article</label>
             <textarea class="form-control" placeholder="explain article...." name="article" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="titleImg">Main Image</label>
+            <input type="file" class="form-control"  name="titleImg" id="titleImg">
         </div>
         <div class="form-group">
             <label for="articleImages">Article Images</label>

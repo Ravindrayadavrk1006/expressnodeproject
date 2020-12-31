@@ -6,7 +6,10 @@
 {
     text-align: center;
     /* height: 10vh; */
-    padding-bottom: 2%;
+    padding-bottom:.5vh;
+    margin-left: 5vw;
+    margin-bottom: 5vh;
+    font-family: 'Merriweather', serif;
 }
 .card p
 {
@@ -14,7 +17,8 @@
 }
 .card img
 {
-    height: 17vw;
+    height:30vh;
+    width: 100%;
 }
 .date
 {
@@ -23,10 +27,7 @@
     opacity: .7;
 
 }
-.news-col
-{
-   margin-bottom: 5vh   ; 
-}
+
 @media only screen and (max-width:900px)
 {
     .card p

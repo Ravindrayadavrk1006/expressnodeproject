@@ -16,9 +16,25 @@ var news=new Schema({
         type:String,
         required:true
     },
-    imglocation:
+    titleImages:
+    {    type:[{
+            data:Buffer,
+            contentType:String
+        }],
+         required:false
+    },
+    articleImages:
+    {    type:[{
+            data:Buffer,
+            contentType:String
+        }],
+         required:false
+    },
+    date:
     {
         type:String,
+        default:new Date().toISOString().slice(0, 10)
+
     }
 })
-module.exports=mongoose.model('news',news);
+module.exports=mongoose.model('News',news);

@@ -2,25 +2,29 @@
 const Patient=require('../models/newPatient')
 const bookAppointment=require('../models/appointment')
 const {validationResult}=require('express-validator');
+const News=require('../models/news');
 const multer=require('multer')
 const path=require('path')
 const fs=require('fs');
 const askForAppointment=require('../models/askForAppointment');
+const news = require('../models/news');
 var gfirstName='';
 var gsecondName='';
-var newsStorage=multer.diskStorage({
-    destination:function(req,file,cb)
-    {
-      cb(null,'./public/newsImages/mainImages/')
-    },
-    filename:function(req,file,cb)
-    {
-      var title=req.body.title;
-      var subHeading=req.body.subHeading;
-      cb(null,title+Date.now()+'_'+file.originalname);
-    }
-  })
-  var newsUpload=multer({storage:newsStorage}).array('img',20);
+// var newsStorage=multer.diskStorage({
+//     destination:function(req,file,cb)
+//     {
+//       cb(null,'./public/newsImages/mainImages/')
+//     },
+//     filename:function(req,file,cb)
+//     {
+//         console.log(file);
+//         console.log(req);
+//       var title=req.body.title;
+//       var subHeading=req.body.subHeading;
+//       cb(null,title+Date.now()+'_'+file.originalname);
+//     }
+//   })
+//   var newsUpload=multer({storage:newsStorage}).array('img',20);
 exports.addPatients=(req,res)=>{
         // var wait=async function()
         // {
@@ -61,6 +65,7 @@ exports.addPatients=(req,res)=>{
         .then(result=>{
            
             console.log("data saved to the db");
+            req.flash('success_msg',"patient added to the db");
             res.redirect('/admin')
             // res.render('\admin',{msg:"patient added succesfully SUCCESSFULLY!"})
         })
@@ -80,6 +85,7 @@ exports.bookAppointment=((req,res)=>{
         .save()
         .then(result=>{
             console.log("appointment booked");
+            req.flash('success_msg',"appointment booked");
             res.redirect('/admin')
         })
         .catch(err=>{
@@ -132,6 +138,7 @@ exports.deletePatient=(req,res)=>{
         else
         {
             console.log("patient deleted")
+            req.flash('success_msg',"patient info deleted");
             res.redirect('/admin')
         }
     })
@@ -187,6 +194,7 @@ exports.cancelAppointment=(req,res)=>{
     bookAppointment.deleteMany({firstName:firstName,secondName:secondName},(err,result)=>{
             if(err) throw new Error(err);
             console.log(result);
+            req.flash('success_msg',"appointment canceled");
             res.redirect('/admin')
     })
     
@@ -213,6 +221,7 @@ exports.updateAppointment=(req,res)=>{
         if (err) throw new Error("cannot update the appointment")
         console.log("appointment updated with result=>",result);
     });  
+    req.flash('success_msg',"appointment updated");
     res.redirect('/admin');
 }
 exports.findPatient=(req,res)=>{
@@ -310,6 +319,7 @@ exports.formUpload=(req,res)=>{
         .save()
         .then(result=>{
             console.log("patient asked for appointment");
+            req.flash('success_msg',"appointment notified to the doctor u will receive a confirmation email or text-msg");
             res.redirect('/')
         })
         .catch(err=>{
@@ -329,20 +339,64 @@ exports.getallAskedForAppointment=(req,res)=>{
         
     // })
 }
+exports.getwriteArticle=(req,res)=>{
+    res.render('pages/newsArticle')
+}
 exports.getnewsArticle=(req,res)=>{
-    res.render('pages/newsArticle');
+     var perPage = 6
+    var page = req.params.page || 1
+
+    News
+        .find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec(function(err, news) {
+            News.count().exec(function(err, count) {
+                if (err) return next(err)
+                res.render('pages/news', {
+                    news: news,
+                    current: page,
+                    pages: Math.ceil(count / perPage)
+                })
+            })
+        })
 }
 exports.postnewsArticle=(req,res)=>{
-    newsUpload
-    var mainImage=req['files']
-    console.log(mainImage);
+    var mainImages=req['files']['titleImg'];
+    var articleImages=req['files']['articleImages'];
+    mainImagesArray=[];
+    articleImagesArray=[];
+    for(image of mainImages)
+        {
+            mainImagesArray.push({
+                data:fs.readFileSync(path.join(image['path'])),
+                contentType:'image/png'
+            })
+        }
+    for(image of articleImages)
+        {
+            articleImagesArray.push({
+                data:fs.readFileSync(path.join(image['path'])),
+                contentType:'image/png'
+            })
+        }
+    // console.log(mainImage);
     var tempObj={
         title:req.body.title,
         subHeading:req.body.subHeading,
         article:req.body.article,
+        titleImages:mainImagesArray,
+        articleImages:articleImagesArray
         
     }
-    console.log(tempObj);
+    var newsObj=new News(tempObj)
+    newsObj
+        .save()
+        .then(result=>{
+            console.log(result)
+        })
+    // console.log(tempObj);
+    req.flash('success_msg',"artilce has been posted");
     res.redirect('/admin')
 }
 exports.confirmThisAppointment=(req,res)=>{
@@ -363,9 +417,26 @@ exports.confirmThisAppointment=(req,res)=>{
         .save()
         .then(result=>{
             console.log(result)
+            req.flash('success_msg',"appointment is booked");
             res.redirect('/admin')
         })
         .catch(err=>{
             if(err) throw new Error(err);
         })
+}
+exports.particularArticle=(req,res)=>
+{
+  
+    title=req.params.title
+    News
+        .find({title:title})
+        .then(result=>{
+            console.log(result[0])
+            res.render('pages/particularNews',{news:result[0]})
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+
+
 }
