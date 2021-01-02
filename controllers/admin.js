@@ -169,7 +169,6 @@ exports.updatePatientInfo=(req,res)=>{
 }
 exports.allAppointments=(req,res)=>{
     bookAppointment.find().sort({dateTime:-1}).exec((err,result)=>{
-        console.log(result)
         res.render('pages/adminPages/allAppointments',{appointments:result})
     })
 }
@@ -193,7 +192,6 @@ exports.cancelAppointment=(req,res)=>{
     var secondName=req.body.secondName;
     bookAppointment.deleteMany({firstName:firstName,secondName:secondName},(err,result)=>{
             if(err) throw new Error(err);
-            console.log(result);
             req.flash('success_msg',"appointment canceled");
             res.redirect('/admin')
     })
@@ -230,8 +228,6 @@ exports.findPatient=(req,res)=>{
     console.log(firstName," ",secondName);
      Patient.findOne({firstName:firstName,secondName:secondName},(err,result)=>{
        if(err) throw new Error(err)
-
-        console.log(result);
         res.render(`parts/detailPage`,{title:'patient detail',patient:result});
          
      })
@@ -417,7 +413,7 @@ exports.confirmThisAppointment=(req,res)=>{
    bookAppointmentObj
         .save()
         .then(result=>{
-            console.log(result)
+            // console.log(result)
             req.flash('success_msg',"appointment is booked");
             res.redirect('/admin')
         })

@@ -6,6 +6,7 @@
 }
 .news
 {
+  overflow-x: hidden;
  font-family: 'Merriweather', serif;
 
 }
@@ -44,12 +45,14 @@
 }
 .articleImages
 {
- 
  margin-bottom: 5vh;
 }
 .articImg
 {
+  
   display: block;
-  height: 30vh;
-  width: 100%;
+  height: 50vh;
+  width:auto;
+  /* margin-left:2vw; */
+  /* min-width: 50%; */
 }
