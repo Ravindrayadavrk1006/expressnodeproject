@@ -35,6 +35,11 @@ var news=new Schema({
         type:String,
         default:new Date().toISOString().slice(0, 10)
 
+    },
+    time:
+    {
+        type:String,
+        default:new Date().toLocaleTimeString()
     }
 })
 module.exports=mongoose.model('News',news);

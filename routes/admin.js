@@ -30,7 +30,7 @@ var newsStorage=multer.diskStorage({
   filename:function(req,file,cb)
   {
         var title=req.body['title'];
-        cb(null,title+'_'+file.originalname);
+        cb(null,'_'+file.originalname);
     
       
   }
@@ -43,7 +43,7 @@ var newsUpload=multer({storage:newsStorage})
 //  FOR ADD PATIENT ROUTE
 var upload=multer({storage:storage}).array('images',100);
 router.post('/newsArticle',
-  newsUpload.fields([{name:'titleImg',maxCount:1},{name:'articleImages',maxCount:10}])
+  newsUpload.fields([{name:'titleImg',maxCount:1 },{name:'articleImages',maxCount:10}])
 ,controllers.postnewsArticle)
 router.get('/bookAppointment',[ensureAuthenticated,adminAuth],(req,res)=>{
     res.render('pages/adminPages/bookAppointment')
@@ -68,7 +68,7 @@ router.post('/cancelAppointment',[ensureAuthenticated,adminAuth],controllers.can
 router.get('/updateAppointment',[ensureAuthenticated,adminAuth],controllers.getupdateAppointment);
 router.post('/updateAppointment',[ensureAuthenticated,adminAuth],controllers.updateAppointment);
 router.get('/',[ensureAuthenticated,adminAuth],(req,res)=>{
-    res.render('pages/admin',{msg:''})
+    res.render('pages/admin')
   })
 router.get('/allAskedForAppointment',[ensureAuthenticated,adminAuth],controllers.getallAskedForAppointment);  
 router.get('/newsArticle',[ensureAuthenticated,adminAuth],controllers.getwriteArticle);

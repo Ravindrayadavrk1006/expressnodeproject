@@ -344,10 +344,11 @@ exports.getwriteArticle=(req,res)=>{
 }
 exports.getnewsArticle=(req,res)=>{
      var perPage = 6
-    var page = req.params.page || 1
+    var page = parseInt(req.params.page || 1)
 
     News
         .find({})
+        .sort({date:-1,time:-1})
         .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec(function(err, news) {
@@ -355,8 +356,8 @@ exports.getnewsArticle=(req,res)=>{
                 if (err) return next(err)
                 res.render('pages/news', {
                     news: news,
-                    current: page,
-                    pages: Math.ceil(count / perPage)
+                    currentPage: page,
+                    pageCount: Math.ceil(count / perPage)
                 })
             })
         })
@@ -429,10 +430,10 @@ exports.particularArticle=(req,res)=>
   
     title=req.params.title
     News
-        .find({title:title})
+        .findOne({title:title})
         .then(result=>{
-            console.log(result[0])
-            res.render('pages/particularNews',{news:result[0]})
+            // console.log(result[0])
+            res.render('pages/particularNews',{news:result})
         })
         .catch(err=>{
             console.log(err);
