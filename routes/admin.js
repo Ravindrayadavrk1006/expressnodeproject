@@ -30,7 +30,7 @@ var newsStorage=multer.diskStorage({
   filename:function(req,file,cb)
   {
         var title=req.body['title'];
-        cb(null,'_'+file.originalname);
+        cb(null,file.originalname);
     
       
   }
