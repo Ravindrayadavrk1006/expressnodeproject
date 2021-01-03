@@ -12,7 +12,7 @@ var storage=multer.diskStorage({
   {
       var firstName=req.body.firstName;
       var secondName=req.body.secondName;
-      cb(null,firstName+secondName+'_'+file.originalname);
+      cb(null,firstName+secondName+file.originalname);
   }
 })
 var newsStorage=multer.diskStorage({
