@@ -65,9 +65,9 @@ router.post('/findPatient',[ensureAuthenticated,adminAuth],controllers.findPatie
 router.get('/allAppointments',[ensureAuthenticated,adminAuth],controllers.allAppointments);
 router.get('/cancelAppointment',[ensureAuthenticated,adminAuth],controllers.getcancelAppointment);
 router.post('/cancelAppointment',[ensureAuthenticated,adminAuth],controllers.cancelAppointment);
-router.get('/updateAppointment',[ensureAuthenticated,adminAuth],controllers.getupdateAppointment);
-router.post('/updateAppointment',[ensureAuthenticated,adminAuth],controllers.updateAppointment);
-router.get('/',[ensureAuthenticated,adminAuth],(req,res)=>{
+router.get('/updateAppointment',controllers.getupdateAppointment);
+router.post('/updateAppointment',controllers.updateAppointment);
+router.get('/',(req,res)=>{
     res.render('pages/admin')
   })
 router.get('/allAskedForAppointment',[ensureAuthenticated,adminAuth],controllers.getallAskedForAppointment);  

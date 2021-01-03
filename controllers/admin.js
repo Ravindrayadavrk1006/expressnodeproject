@@ -6,10 +6,24 @@ const News=require('../models/news');
 const multer=require('multer')
 const path=require('path')
 const fs=require('fs');
+// const mailer=require('./mailer');
 const askForAppointment=require('../models/askForAppointment');
 const news = require('../models/news');
 var gfirstName='';
 var gsecondName='';
+//mailer configuration
+const nodemailer=require('nodemailer');
+const options=require('../options');
+
+let transport=nodemailer.createTransport({
+ host:'smtp.gmail.com',
+ port:587,
+ auth:{
+      user:options.mail.username,
+      pass:options.mail.password
+ } 
+});
+
 // var newsStorage=multer.diskStorage({
 //     destination:function(req,file,cb)
 //     {
@@ -80,17 +94,55 @@ exports.bookAppointment=((req,res)=>{
         email:req.body.email,
         mobileNo:req.body.mobileNo,
     }
+     var emailHtml=  `<div className="emailContainer">
+    <div class="head">
+        <h1 style="color:blue;" >Om Dentals !</h1>
+    </div>
+    <div class="detail">
+        <strong>
+                your appointment has been booked 
+                Date:  ${tempObj.dateTime.substr(0,9)}
+                Time:  ${tempObj.dateTime.substr(11,)}
+        </strong>
+        
+    </div>
+    <div class="footer">
+        <h5>Thank you for contacting us</h5>
+    </div>
+</div>`
+    const message={
+    from:'Omdentalsphagwara@gmail.com',
+    to:tempObj.email,
+    subject:'Om dentals ! Appointment Booking Confirmation',
+    html:emailHtml,
+    }
+
     let newAppointment=new bookAppointment(tempObj)
     newAppointment
         .save()
         .then(result=>{
             console.log("appointment booked");
+        transport.sendMail(message)
+            .then(result=>{
+                console.log(result)
+            })
             req.flash('success_msg',"appointment booked");
             res.redirect('/admin')
         })
         .catch(err=>{
-            if (err) throw Error;
-            console.log(err);
+            if (err) 
+            {
+                
+                console.log(err);
+                throw Error;
+            }
+        })
+        .catch(err=>{
+            if(err)
+            {
+                console.log(err)
+                throw Error(err);
+            }
         })
     
     // res.redirect('/admin',{msg:"appointment booked SUCCESSFULLY!"})
@@ -190,11 +242,55 @@ exports.getcancelAppointment=(req,res)=>{
 exports.cancelAppointment=(req,res)=>{
     var firstName=req.body.firstName;
     var secondName=req.body.secondName;
-    bookAppointment.deleteMany({firstName:firstName,secondName:secondName},(err,result)=>{
-            if(err) throw new Error(err);
-            req.flash('success_msg',"appointment canceled");
-            res.redirect('/admin')
-    })
+     var emailHtml=  `<div className="emailContainer">
+    <div class="head">
+        <h1 style="color:blue;" >Om Dentals !</h1>
+    </div>
+    <div class="detail">
+        <strong>
+             Sorry ! to inform u that the previous appointment has been canceled due to some reason we are very sorry for this inconvenience
+
+        </strong>
+        <p>
+                Contact Us at :<br>
+                email : omdentalsphagwara@gmail.com <br>
+                phone : 9464544442
+        </p>
+    </div>
+    <div class="footer">
+        <h5>Thank you for contacting us</h5>
+    </div>
+</div>`
+    bookAppointment
+        .find({firstName:firstName,secondName:secondName})
+        .then(result=>{
+            console.log(result);
+            const message={
+                from:'Omdentalsphagwara@gmail.com',
+                to:result[0].email,
+                subject:'Om dentals ! Appointment Booking Confirmation',
+                html:emailHtml,
+                }
+                transport.sendMail(message)
+                    .then(result=>{
+                        console.log(result)
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                        throw new Error(err);
+                    })
+        })
+    bookAppointment.deleteMany({firstName:firstName,secondName:secondName})
+            .then(result=>{
+               
+
+                req.flash('success_msg',"appointment canceled");
+                 res.redirect('/admin')
+            })
+            .catch(err=>{
+                console.log(err)
+                throw new Error(err);
+            })
     
 }
 exports.getupdateAppointment=(req,res)=>{
@@ -215,9 +311,44 @@ exports.updateAppointment=(req,res)=>{
     var firstName=req.body.firstName;
     var secondName=req.body.secondName;
     var dateTime=req.body.dateTime;
+     var emailHtml=  `<div className="emailContainer">
+    <div class="head">
+        <h1 style="color:blue;" >Om Dentals !</h1>
+    </div>
+    <div class="detail">
+        <strong>
+                your appointment has been rescheduled 
+                Date:  ${dateTime.substr(0,9)}
+                Time:  ${dateTime.substr(11,)}
+        </strong>
+        
+    </div>
+    <div class="footer">
+        <h5>Thank you for contacting us</h5>
+    </div>
+</div>`
+    const message={
+    from:'Omdentalsphagwara@gmail.com',
+    to:tempObj.email,
+    subject:'Om dentals ! Appointment Reschedulig Confirmation',
+    html:emailHtml,
+    }
     bookAppointment.updateOne({firstName:firstName,secondName:secondName},{$set:{dateTime:dateTime}},(err,result)=>{
         if (err) throw new Error("cannot update the appointment")
-        console.log("appointment updated with result=>",result);
+        
+        else
+        {
+            console.log("appointment updated with result=>",result);
+            transport.sendMail(message)
+            .then(result=>{
+                console.log(result)
+            })
+            .catch(err=>{
+                console.log(err);
+                throw new Error(err);
+            })
+        }
+        
     });  
     req.flash('success_msg',"appointment updated");
     res.redirect('/admin');
@@ -324,7 +455,7 @@ exports.formUpload=(req,res)=>{
     
 }
 exports.getallAskedForAppointment=(req,res)=>{
-    askForAppointment.find().sort({date:-1,time:-1}).exec((err,result)=>{
+    askForAppointment.find().sort({date:-1,timeStamp:-1}).exec((err,result)=>{
         if(err) throw new Error(err)
         // console.log(result);
          res.render('pages/adminPages/allAskedAppointments',{appointments:result})
@@ -397,9 +528,31 @@ exports.postnewsArticle=(req,res)=>{
     res.redirect('/admin')
 }
 exports.confirmThisAppointment=(req,res)=>{
+    
    var StringObj=req.body.appointment;
    var jsonObj=JSON.parse(StringObj);
-//    console.log(jsonObj);
+   var emailHtml=  `<div className="emailContainer">
+    <div class="head">
+        <h1 style="color:blue;" >Om Dentals !</h1>
+    </div>
+    <div class="detail">
+        <strong>
+                your appointment has been booked 
+                Date:  ${jsonObj.date}
+                Time:  ${jsonObj.time}
+        </strong>
+        
+    </div>
+    <div class="footer">
+        <h5>Thank you for contacting us</h5>
+    </div>
+</div>`
+    const message={
+    from:'Omdentalsphagwara@gmail.com',
+    to:jsonObj.email,
+    subject:'Om dentals ! Appointment Booking Confirmation',
+    html:emailHtml,
+    }
    var dateTime=jsonObj.date+"T"+jsonObj.time;
 //    console.log(dateTime);
    var tempObj={
@@ -414,11 +567,34 @@ exports.confirmThisAppointment=(req,res)=>{
         .save()
         .then(result=>{
             // console.log(result)
+            transport.sendMail(message)
+            .then(result=>{
+                console.log(result)
+            })
+            askForAppointment.deleteOne({firstName:jsonObj.firstName,
+            secondName:jsonObj.secondName})
+            .then(result=>{
+                console.log(result)
+            })
             req.flash('success_msg',"appointment is booked");
             res.redirect('/admin')
         })
         .catch(err=>{
             if(err) throw new Error(err);
+        })
+        .catch(err=>{
+            if(err)
+            {
+                console.log("error =>",err)
+                throw new Error(err)
+            }
+        })
+        .catch(err=>{
+            if(err)
+            {
+                console.log('cannnot be deleted')
+                throw new Error(err)
+            }
         })
 }
 exports.particularArticle=(req,res)=>

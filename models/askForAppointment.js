@@ -43,7 +43,7 @@ const askForAppointmentSchema=new Schema({
     timeStamp:
     {
         type:String,
-        default:new Date()
+        default:new Date().toLocaleTimeString(),
     }
 })
 

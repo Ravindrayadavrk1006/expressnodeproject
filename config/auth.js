@@ -13,17 +13,7 @@ module.exports={
 
         }
         
-        // console.log(req.isAuthenticated);
-        // req.session.passport.username !== undefined
-        // console.log(req.session)
-        // if(req.session.passport != undefined)
-        // {
-        //     console.log(req.session.passport);
-        // }
-        // if(req.session.passport.user !== undefined)
-        // {
-        //     return next();
-        // }
+        
         
     },
     //checking if the author is the admin or not
