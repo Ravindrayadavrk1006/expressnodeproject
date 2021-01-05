@@ -43,7 +43,7 @@ var newsUpload=multer({storage:newsStorage})
 //  FOR ADD PATIENT ROUTE
 var upload=multer({storage:storage}).array('images',100);
 router.post('/newsArticle',
-  newsUpload.fields([{name:'titleImg',maxCount:1 },{name:'articleImages',maxCount:10}])
+  newsUpload.fields([{name:'titleImg',maxCount:10 },{name:'articleImages',maxCount:10}])
 ,controllers.postnewsArticle)
 router.get('/bookAppointment',[ensureAuthenticated,adminAuth],(req,res)=>{
     res.render('pages/adminPages/bookAppointment')
