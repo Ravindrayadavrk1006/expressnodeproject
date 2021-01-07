@@ -5,6 +5,7 @@
     <%- include('./head.ejs')%>
     <title>OM DENTALS</title>
     <link rel="stylesheet" href="/stylesheets/detailPage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.10.0/css/lightgallery.css">
 </head>
 <body>   
     <form action="#" method="get">
@@ -56,11 +57,14 @@
                     <%=patient.treatmentInfo%>
                 </textarea>
             </div>
-            <div  class="images">
+            <div id="lightgallery" class="images">
                 <% for(each of patient.images){%>
-                    <img id="image" src="data:image/<%=each.contentType%>;base64,
-                     <%=each.data.toString('base64')%>">
-                    <%}%>54`    e5 
+                    <img data-sizes="(min-width: 80em) 100vh, 100vw" data-src="data:image/<%=each.contentType%>;base64,
+                     <%=each.data.toString('base64')%>
+                     " style="cursor: pointer;border: 1px solid grey;" data-lightbox="roadtrip" id="image" src="data:image/<%=each.contentType%>;base64,
+                     <%=each.data.toString('base64')%>
+                     ">
+                    <%}%>
             </div>
         <%}%>
   
@@ -73,13 +77,20 @@
         }
         #image
         {
-            height:100%;
-            width: 30%;
+            height:20vh;
+            width: 20vw;
             /* margin-bottom: 10%; */
             /* width: 300px; */
         }
-
+    
     </style>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#lightgallery").lightGallery({
+        }); 
+    });
+</script>
+    
 </body>
 </html>

@@ -521,7 +521,7 @@ exports.postnewsArticle=(req,res)=>{
     newsObj
         .save()
         .then(result=>{
-            console.log(result)
+            console.log("news saved to the database")
         })
     // console.log(tempObj);
     req.flash('success_msg',"artilce has been posted");
