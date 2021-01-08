@@ -15,8 +15,8 @@
                 
                     <form action="/admin/findPatient" method="POST">
                         <div>
-                    <button >
-                    <input value="<%-patient.firstName%>" type="text" name="firstName" id="firstName">
+                    <button  >
+                    <input  value="<%-patient.firstName%>" type="text" name="firstName" id="firstName">
                     <span>
                     <input value="<%-patient.secondName%>" type="text" name="secondName" id="secondName">
                     </span>
@@ -27,6 +27,21 @@
            <%}%>
     </ul>
     <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        form
+        {
+            padding: 0%;
+        }
+        button
+        {
+            border: none;
+            background: none;
+        }
         li
         {
             padding: none;
@@ -40,14 +55,13 @@
             position: inherit;
             height:20vh
         }
-        ul
+         ul
         {
             margin-left: 30%;
             margin-right: 30%;
-            /* width: 40%; */
             font:20px;
             color: grey;
-        }
+        } 
         
     </style>
     <script>
