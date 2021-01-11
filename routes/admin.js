@@ -3,16 +3,20 @@ const router=express.Router();
 const controllers=require('../controllers/admin');
 const {ensureAuthenticated,adminAuth}=require('../config/auth');
 const multer=require('multer');
+const path =require('path')
 var storage=multer.diskStorage({
   destination:function(req,file,cb)
   {
-      cb(null,'./public/uploads/');
+    // // cb(null,path.join(+'/public'+'/uploads/'))
+    // cb(null,path.join('..'+"/public/"+'uploads/'))
+    //   // cb(null,'./public/uploads/');
+    cb(null, path.join(__dirname,'..', '/public/','uploads/'));
   },
   filename:function(req,file,cb)
   {
-      var firstName=req.body.firstName;
-      var secondName=req.body.secondName;
-      cb(null,firstName+secondName+file.originalname);
+      // var firstName=req.body.firstName;
+      // var secondName=req.body.secondName;
+      cb(null,new Date().toISOString().replace(/[\/\\:]/g, "_")+file.originalname);
   }
 })
 var newsStorage=multer.diskStorage({
@@ -20,17 +24,20 @@ var newsStorage=multer.diskStorage({
   {
     if(file.fieldname=='titleImg')
     {
-      cb(null,'./public/newsImages/mainImages/')
+      cb(null,path.join(__dirname,'..','/public/','newsImages/','mainImages/'))
+      // cb(null,'./public/newsImages/mainImages/')
     }
     else{
-       cb(null,'./public/newsImages/detailImages/')
+      cb(null,path.join(__dirname,'..','/public/','newsImages/','detailImages/'))
+      //  cb(null,'./public/newsImages/detailImages/')
     }
     
   },
   filename:function(req,file,cb)
   {
-        var title=req.body['title'];
-        cb(null,file.originalname);
+        // var title=req.body['title'];
+        // cb(null,file.originalname);
+        cb(null,new Date().toISOString().replace(/[\/\\:]/g, "_")+file.originalname);
     
       
   }
@@ -42,6 +49,7 @@ var newsUpload=multer({storage:newsStorage})
 
 //  FOR ADD PATIENT ROUTE
 var upload=multer({storage:storage}).array('images',100);
+var upload1=multer({storage:storage}).array('images',100);
 router.post('/newsArticle',
   newsUpload.fields([{name:'titleImg',maxCount:1 },{name:'articleImages',maxCount:10}])
 ,controllers.postnewsArticle)
@@ -58,7 +66,6 @@ router.get('/deletePatient',[ensureAuthenticated,adminAuth],controllers.getdelet
 router.post('/deletePatient',[ensureAuthenticated,adminAuth],controllers.deletePatient);
 router.get('/updatePatient',[ensureAuthenticated,adminAuth],controllers.getupdatePatient);
 router.post('/updatePatient',[ensureAuthenticated,adminAuth],controllers.updatePatient);
-// router.get('/updatePatientInfo',controllers.getupdatePatientInfo);
 router.post('/updatePatientInfo',[ensureAuthenticated,adminAuth],controllers.updatePatientInfo);
 router.get('/findPatient',[ensureAuthenticated,adminAuth],controllers.getfindPatient);
 router.post('/findPatient',[ensureAuthenticated,adminAuth],controllers.findPatient);

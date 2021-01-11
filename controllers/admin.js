@@ -204,6 +204,22 @@ exports.updatePatientInfo=(req,res)=>{
     var email=req.body.email;
     var treatmentType=req.body.treatmentType;
     var treatmentInfo=req.body.treatmentInfo;
+    var imagesArray=[];
+    //  var temp=req['files'];
+    //  console.log(temp);
+    //  console.log('req.body',req.body);
+    //     var images=[]
+    //     for(image of temp)
+    //     {
+    //         images.push({
+    //             data:fs.readFileSync(path.join(image['path'])),
+    //             contentType:'image/png'
+    //         })
+    //     }
+    //     Patient.findOne({firstName:gfirstName,secondName:gsecondName})
+    //         .then(result=>{
+    //             imagesArray=result['images'].concat(images)
+    //         })
         Patient.updateOne({firstName:gfirstName,secondName:gsecondName},{$set:
             {
                 firstName:firstName,
@@ -212,7 +228,7 @@ exports.updatePatientInfo=(req,res)=>{
                 treatmentType:treatmentType,
                 mobileNo:mobileNo,
                 email:email,
-            }},{upsert:true},(err,result)=>{
+            }},{upsert:false},(err,result)=>{
                 if(err) throw new Error(err)
                 console.log('date edited succesfully !!!')
             });
@@ -479,7 +495,7 @@ exports.getnewsArticle=(req,res)=>{
         .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec(function(err, news) {
-            News.count().exec(function(err, count) {
+            News.countDocuments().exec(function(err, count) {
                 if (err) return next(err)
                 res.render('pages/news', {
                     news: news,

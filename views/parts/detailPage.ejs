@@ -61,7 +61,7 @@
                 <% for(each of patient.images){%>
                     <img data-sizes="(min-width: 80em) 100vh, 100vw" data-src="data:image/<%=each.contentType%>;base64,
                      <%=each.data.toString('base64')%>
-                     " style="cursor: pointer;border: 1px solid grey;" data-lightbox="roadtrip" id="image" src="data:image/<%=each.contentType%>;base64,
+                     " style="cursor: pointer;border: 1px solid grey;opacity:.7;margin: 1px;" data-lightbox="roadtrip" id="image" src="data:image/<%=each.contentType%>;base64,
                      <%=each.data.toString('base64')%>
                      ">
                     <%}%>

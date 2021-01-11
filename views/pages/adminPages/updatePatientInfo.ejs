@@ -62,8 +62,37 @@
                 <%=patient[0].treatmentInfo%>
             </textarea>
         </div>
+        <div class=" form-group imageUpload">
+            <label for="images">
+                Images
+            </label>
+            <input class="form-control" type="file" name="images" multiple id="images">
+        </div>
+        <div class="previewImages">
         <button class="btn btn-danger">Update</button>
     <%}%>
+    <script>
+        $(document).ready(function () {
+            let imagePreview = function (input, placeToInsertImagePreview) {
+                if (input.files) {
+                    let filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        let reader = new FileReader();
+                        reader.onload = function (event) {
+                            $($.parseHTML("<img>"))
+                                .attr('style', "height:20vh;width:20vw;margin:1px;")
+                                .attr("src", event.target.result)
+                                .appendTo(placeToInsertImagePreview)
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+            $("#images").on("change", function () {
+                imagePreview(this, "div.previewImages")
+            })
+        })
+    </script>
 </form>
 </body>
 </html>
