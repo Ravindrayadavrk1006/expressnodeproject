@@ -59,7 +59,7 @@
             </div>
             <div id="lightgallery" class="images">
                 <% for(each of patient.images){%>
-                    <img data-sizes="(min-width: 80em) 100vh, 100vw" data-src="data:image/<%=each.contentType%>;base64,
+                    <img  data-sizes="(min-width: 80em) 100vh, 100vw" data-src="data:image/<%=each.contentType%>;base64,
                      <%=each.data.toString('base64')%>
                      " style="cursor: pointer;border: 1px solid grey;opacity:.7;margin: 1px;" data-lightbox="roadtrip" id="image" src="data:image/<%=each.contentType%>;base64,
                      <%=each.data.toString('base64')%>
@@ -69,7 +69,18 @@
         <%}%>
   
     </form>
+    <script>
+        $(document).ready(function(){
+            $('#image').hover(function(){
+                $('#image').css('opacity','1');
+            })
+            $('#image').mouseout(function(){
+                $('#image').css('opacity', '.7');  
+            })
+        })
+    </script>
     <style>
+        
         .images
         {
            border:4px solid black;
